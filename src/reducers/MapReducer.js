@@ -13,7 +13,8 @@ const INITIAL_STATE = {
     longitudeDelta: 0,
     name: '',
     address: '',
-    loading: false
+    loading: false,
+    placeId: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -24,7 +25,8 @@ export default (state = INITIAL_STATE, action) => {
           ...INITIAL_STATE,
           latitude: action.payload.lat,
           longitude: action.payload.long,
-          name: action.payload.name
+          name: action.payload.name,
+          placeId: action.payload.placeId
         };
       case MAP_INITIALIZE_START:
         return {
@@ -45,9 +47,11 @@ export default (state = INITIAL_STATE, action) => {
           latitude: action.payload.lat,
           longitude: action.payload.long,
           name: action.payload.name,
-          address: action.payload.address
+          address: action.payload.address,
+          placeId: action.payload.placeId
         };
       default:
         return state;
   }
 };
+

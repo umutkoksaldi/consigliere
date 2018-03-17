@@ -9,9 +9,9 @@ import { CardSection } from './common';
 class TaskCreate extends Component {
 
   onDoneButtonPress() {
-    const { name, phone } = this.props;
+    const { name, phone, placeId } = this.props;
 
-    this.props.taskCreate({ name, phone });
+    this.props.taskCreate({ name, phone, placeId });
   }
 
   render() {

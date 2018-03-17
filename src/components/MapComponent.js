@@ -43,6 +43,7 @@ class MapComponent extends Component {
       long: this.props.longitude,
       latDelta: this.props.latitudeDelta,
       longDelta: this.props.longitudeDelta,
+      placeId: this.props.placeId
     });
   }
 
@@ -114,7 +115,8 @@ const mapStateToProps = state => {
     longitudeDelta: LONGITUDE_DELTA,
     name: state.map.name,
     address: state.map.address,
-    loading: state.map.loading
+    loading: state.map.loading,
+    placeId: state.map.placeId
   };
 
   // Alert.alert(JSON.stringify(state.map.latitude));
@@ -185,3 +187,4 @@ const styles = StyleSheet.create({
 });
 
 export default connect(mapStateToProps, { mapInitialize, mapUpdate, mapSearch })(MapComponent);
+
