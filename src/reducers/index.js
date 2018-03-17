@@ -1,10 +1,14 @@
 import { combineReducers } from 'redux';
+import LibraryReducer from './LibraryReducer';
+import SelectionReducer from './SelectionReducer';
 import AuthReducer from './AuthReducer';
-import EmployeeFormReducer from './EmployeeFormReducer';
-import EmployeeListReducer from './EmployeeListReducer';
+import TaskFormReducer from './TaskFormReducer';
+import MapReducer from './MapReducer';
 
 export default combineReducers({
-    auth: AuthReducer,
-    employeeForm: EmployeeFormReducer,
-    employees: EmployeeListReducer
+  libraries: LibraryReducer,
+  selectedLibraryId: SelectionReducer,
+  auth: AuthReducer,
+  taskForm: TaskFormReducer,
+  map: MapReducer
 });

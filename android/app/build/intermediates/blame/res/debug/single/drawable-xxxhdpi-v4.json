@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/home/kucukbays/Desktop/consigliere/android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4/powered_by_google_dark.png",
+        "source": "/home/kucukbays/Desktop/consigliere/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-places/10.2.4/res/drawable-xxxhdpi-v4/powered_by_google_dark.png"
+    },
+    {
+        "merged": "/home/kucukbays/Desktop/consigliere/android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4/places_ic_clear.png",
+        "source": "/home/kucukbays/Desktop/consigliere/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-places/10.2.4/res/drawable-xxxhdpi-v4/places_ic_clear.png"
+    },
+    {
+        "merged": "/home/kucukbays/Desktop/consigliere/android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4/powered_by_google_light.png",
+        "source": "/home/kucukbays/Desktop/consigliere/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-places/10.2.4/res/drawable-xxxhdpi-v4/powered_by_google_light.png"
+    },
+    {
+        "merged": "/home/kucukbays/Desktop/consigliere/android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4/places_ic_search.png",
+        "source": "/home/kucukbays/Desktop/consigliere/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-places/10.2.4/res/drawable-xxxhdpi-v4/places_ic_search.png"
+    }
+]
