@@ -38,7 +38,12 @@ class MapComponent extends Component {
   }
 
   onCalloutPress() {
-    Actions.taskComponent();
+    Actions.taskComponent({
+      lat: this.props.latitude,
+      long: this.props.longitude,
+      latDelta: this.props.latitudeDelta,
+      longDelta: this.props.longitudeDelta,
+    });
   }
 
   render() {

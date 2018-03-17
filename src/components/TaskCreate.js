@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Text, View } from 'react-native';
+import { Text, View, Alert, StyleSheet } from 'react-native';
+import MapView from 'react-native-maps';
 import { Button, Item, Input } from 'native-base';
 import { taskUpdate, taskCreate } from '../actions';
 import { CardSection } from './common';
@@ -37,6 +38,20 @@ class TaskCreate extends Component {
         </Item>
 
         <View style={styles.mapContainer}>
+          <MapView
+            region={{ latitude: this.props.lat,
+                      longitude: this.props.long,
+                      longitudeDelta: this.props.longDelta,
+                      latitudeDelta: this.props.latDelta }}
+            style={styles.map}
+          >
+            <MapView.Marker
+                coordinate={{ latitude: this.props.lat,
+                              longitude: this.props.long }}
+                style={{ pinColor: '#9D1017' }}
+            >
+            </MapView.Marker>
+          </MapView>
         </View>
 
         <View style={styles.buttonContainer}>
@@ -81,7 +96,7 @@ const mapStateToProps = (state) => {
   return { name, phone };
 };
 
-const styles = {
+const styles = StyleSheet.create({
   buttonContainer: {
     backgroundColor: 'transparent',
     width: '50%',
@@ -118,7 +133,11 @@ const styles = {
     borderColor: '#9D1017',
     marginLeft: '5%',
     marginTop: 10
+  },
+  map: {
+    ...StyleSheet.absoluteFillObject
   }
-};
+});
 
 export default connect(mapStateToProps, { taskUpdate, taskCreate })(TaskCreate);
+
