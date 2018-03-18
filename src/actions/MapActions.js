@@ -1,10 +1,8 @@
 import { Alert } from 'react-native';
-import axios from 'axios';
 import RNGooglePlaces from 'react-native-google-places';
 import {
   MAP_INITIALIZE,
   MAP_INITIALIZE_START,
-  MAP_UPDATE_SUCCESS,
   MAP_SEARCH
 } from './types';
 
@@ -26,32 +24,6 @@ export const mapInitialize = () => {
       })
       .catch((error) => console.log(error.message));
   };
-};
-
-
-export const mapUpdate = () => {
-    return (dispatch) => {
-      axios.get('https://maps.googleapis.com/maps/api/geocode/json?&address=kentpark')
-        .then((response) => {
-          const responseStr = JSON.stringify(response.data);
-          const responseObj = JSON.parse(responseStr);
-          const lat = responseObj.results[0].geometry.location.lat;
-          const long = responseObj.results[0].geometry.location.lng;
-
-          //Alert.alert(JSON.stringify(long));
-
-          mapUpdateSuccess(dispatch, lat, long);
-        }
-      );
-    };
-};
-
-const mapUpdateSuccess = (dispatch, lat, long) => {
-  //Alert.alert(JSON.stringify(long));
-  dispatch({
-    type: MAP_UPDATE_SUCCESS,
-    payload: { lat, long }
-  });
 };
 
 export const mapSearch = () => {

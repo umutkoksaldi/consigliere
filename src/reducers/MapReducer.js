@@ -2,7 +2,6 @@ import { Alert } from 'react-native';
 import {
   MAP_INITIALIZE,
   MAP_INITIALIZE_START,
-  MAP_UPDATE_SUCCESS,
   MAP_SEARCH
 } from '../actions/types';
 
@@ -33,13 +32,6 @@ export default (state = INITIAL_STATE, action) => {
           ...state,
           ...INITIAL_STATE,
           loading: true
-        };
-      case MAP_UPDATE_SUCCESS:
-        // Alert.alert('In mapUpdateSuccess Reducer');
-        return {
-          ...state,
-          latitude: action.payload.lat,
-          longitude: action.payload.long
         };
       case MAP_SEARCH:
         return {

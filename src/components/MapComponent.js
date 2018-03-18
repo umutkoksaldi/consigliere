@@ -11,7 +11,7 @@ import { Button, Icon, Spinner } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 
 import { connect } from 'react-redux';
-import { mapInitialize, mapUpdate, mapSearch } from '../actions';
+import { mapInitialize, mapSearch } from '../actions';
 
 
 const { width, height } = Dimensions.get('window');
@@ -186,5 +186,5 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect(mapStateToProps, { mapInitialize, mapUpdate, mapSearch })(MapComponent);
+export default connect(mapStateToProps, { mapInitialize, mapSearch })(MapComponent);
 

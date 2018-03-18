@@ -7,5 +7,4 @@ export const TASK_UPDATE = 'task_update';
 export const TASK_CREATE = 'task_create';
 export const MAP_INITIALIZE = 'map_initialize';
 export const MAP_INITIALIZE_START = 'map_initialize_start';
-export const MAP_UPDATE_START = 'map_update_start';
 export const MAP_SEARCH = 'map_search';
