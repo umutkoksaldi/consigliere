@@ -4,14 +4,13 @@ import { Text, View, Alert, StyleSheet } from 'react-native';
 import MapView from 'react-native-maps';
 import { Button, Item, Input } from 'native-base';
 import { taskUpdate, taskCreate } from '../actions';
-import { CardSection } from './common';
 
 class TaskCreate extends Component {
 
   onDoneButtonPress() {
-    const { name, phone, placeId } = this.props;
+    const { taskName, time, placeId } = this.props;
 
-    this.props.taskCreate({ name, phone, placeId });
+    this.props.taskCreate({ taskName, time, placeId });
   }
 
   render() {
@@ -19,21 +18,21 @@ class TaskCreate extends Component {
       <View>
         <Item underline style={{ marginLeft: 20, marginRight: 20, marginBottom: 5 }}>
           <Input
-            label="Name"
+            label="taskName"
             placeholder="Visit Grandma"
             style={styles.input}
-            value={this.props.name}
-            onChangeText={value => this.props.taskUpdate({ prop: 'name', value })}
+            value={this.props.taskName}
+            onChangeText={value => this.props.taskUpdate({ prop: 'taskName', value })}
           />
         </Item>
 
         <Item underline style={{ marginLeft: 20, marginRight: 20 }}>
           <Input
-            label="Phone"
+            label="time"
             placeholder="5 pm"
             style={styles.input}
-            value={this.props.phone}
-            onChangeText={value => this.props.taskUpdate({ prop: 'phone', value })}
+            value={this.props.time}
+            onChangeText={value => this.props.taskUpdate({ prop: 'time', value })}
           />
         </Item>
 
@@ -75,25 +74,15 @@ class TaskCreate extends Component {
           </Button>
         </View>
 
-        <Button
-          block
-          style={styles.saveButton}
-          onPress={this.onDoneButtonPress.bind(this)}
-        >
-          <Text style={styles.buttonText}>
-            Save
-          </Text>
-        </Button>
-
       </View>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  const { name, phone } = state.taskForm;
+  const { taskName, time } = state.taskForm;
 
-  return { name, phone };
+  return { taskName, time };
 };
 
 const styles = StyleSheet.create({
@@ -105,10 +94,6 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: '#9D1017',
     marginTop: 15
-  },
-  saveButton: {
-    backgroundColor: '#9D1017',
-    marginTop: 25
   },
   buttonText: {
     alignSelf: 'center',

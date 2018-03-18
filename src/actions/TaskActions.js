@@ -9,12 +9,12 @@ export const taskUpdate = ({ prop, value }) => {
   };
 };
 
-export const taskCreate = ({ name, phone, placeId }) => {
+export const taskCreate = ({ taskName, time, placeId }) => {
   const { currentUser } = firebase.auth();
 
   return (dispatch) => {
     firebase.database().ref(`/users/${currentUser.uid}/tasks`)
-      .push({ name, phone, placeId });
+      .push({ taskName, time, placeId });
 
     dispatch({
       type: TASK_CREATE,

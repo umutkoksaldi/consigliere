@@ -4,8 +4,8 @@ import {
 } from '../actions/types';
 
 const INITIAL_STATE = {
-  name: '',
-  phone: '',
+  taskName: '',
+  time: '',
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -18,3 +18,4 @@ export default (state = INITIAL_STATE, action) => {
         return state;
   }
 };
+
