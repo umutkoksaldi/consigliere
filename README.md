@@ -12,8 +12,9 @@
     TASKLIST.JS
   4. Task List currently is listing the names -> convert it to native-base SwipeableRow component (rightSwipe: delete the task from database / leftSwipe: get the user to the Task Edit screen which is basically TaskCreate.js)
   5. List just shows name -> add "location name | time" as a sub-text as in our mockup UI.
-  6. CUrrently no List Separation as Tomorrow, Today etc. (bcos we do not hold the date data for tasks) -> add date in TaskCreate and display the tasks according to date using ListDivider in native-base
+  6. Currently no List Separation as Tomorrow, Today etc. (bcos we do not hold the date data for tasks) -> add date in TaskCreate and display the tasks according to date using ListDivider in native-base
   7. On asynchronous Firebase call at Tasks tab, there is no spinner to be shown in the wait time -> add a Spinner
+  8. Add 'Add' button ( '+' Icon preferred) and connect it to TaskCreate.js
   
     LOGINFORM.JS
   8. No Register button as in UI Mockup and no SignUp functionality -> add the text, button and the functionality
