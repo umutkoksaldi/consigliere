@@ -17,13 +17,13 @@
   8. Add 'Add' button ( '+' Icon preferred) and connect it to TaskCreate.js
   
     LOGINFORM.JS
-  8. No Register button as in UI Mockup and no SignUp functionality -> add the text, button and the functionality
+  9. No Register button as in UI Mockup and no SignUp functionality -> add the text, button and the functionality
   
     MAINTAB.JS
-  9. In RouterComponent.js, add a right button for 'Logout' (Icon preferred) and add the Logout functionality
+  10. In RouterComponent.js, add a right button for 'Logout' (Icon preferred) and add the Logout functionality
   
   
- *** 10. Currently when you exit the app, you log out -> make logins persistent
+ *** 11. Currently when you exit the app, you log out -> make logins persistent
 
 
 ---------------------
