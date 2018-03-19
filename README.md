@@ -24,3 +24,9 @@
   
  *** 10. Currently when you exit the app, you log out -> make logins persistent
 
+
+---------------------
+  Logic Tier
+---------------------
+
+  ...
