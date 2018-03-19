@@ -10,4 +10,3 @@ export const TASK_FETCH_SUCCESS = 'task_fetch_success';
 export const MAP_INITIALIZE = 'map_initialize';
 export const MAP_INITIALIZE_START = 'map_initialize_start';
 export const MAP_SEARCH = 'map_search';
-

@@ -125,4 +125,3 @@ const styles = StyleSheet.create({
 });
 
 export default connect(mapStateToProps, { taskUpdate, taskCreate })(TaskCreate);
-

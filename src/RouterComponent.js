@@ -1,10 +1,8 @@
 import React from 'react';
-import { Scene, Router, Actions } from 'react-native-router-flux';
-import { Button, Icon } from 'native-base';
+import { Scene, Router } from 'react-native-router-flux';
 import LoginForm from './components/LoginForm';
-import TaskList from './components/TaskList';
 import TaskCreate from './components/TaskCreate';
-import MapComponent from './components/MapComponent';
+import MainPage from './components/MainPage';
 
 const RouterComponent = () => {
   return (
@@ -22,40 +20,27 @@ const RouterComponent = () => {
         />
       </Scene>
 
-      <Scene
-        key="map"
-        navigationBarStyle={{
-          backgroundColor: '#9D1017',
-          borderBottomWidth: 7,
-          borderBottomColor: '#E81721' }}
-        titleStyle={{ color: '#FFFFFF', fontWeight: 'bold' }}
-      >
+      <Scene key="main" >
         <Scene
-          key="mapComponent"
-          component={MapComponent}
-          title="Map"
+          key="mainTab"
+          title="consigliere"
+          titleStyle={{ color: '#FFF', fontWeight: 'bold', fontSize: 20, marginBottom: 3 }}
+          component={MainPage}
+          navigationBarStyle={{
+            backgroundColor: '#9D1017',
+            borderBottomWidth: 0,
+            borderBottomColor: '#E81721' }}
         />
         <Scene
           key="taskComponent"
           component={TaskCreate}
           title="Task"
+          navigationBarStyle={{
+            backgroundColor: '#9D1017',
+            borderBottomWidth: 0,
+            borderBottomColor: '#E81721' }}
+          titleStyle={{ color: '#FFFFFF', fontWeight: 'bold' }}
           leftButtonIconStyle={{ tintColor: '#FFFFFF' }}
-        />
-
-      </Scene>
-
-      <Scene
-        key="task"
-        navigationBarStyle={{
-          backgroundColor: '#9D1017',
-          borderBottomWidth: 7,
-          borderBottomColor: '#E81721' }}
-        titleStyle={{ color: '#FFFFFF', fontWeight: 'bold' }}
-      >
-        <Scene
-          key="taskListComponent"
-          component={TaskList}
-          title="Tasks"
         />
       </Scene>
 
@@ -64,4 +49,3 @@ const RouterComponent = () => {
 };
 
 export default RouterComponent;
-

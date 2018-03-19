@@ -20,7 +20,7 @@ export const taskCreate = ({ taskName, time, placeId }) => {
       type: TASK_CREATE,
     });
 
-    Actions.mapComponent({ type: 'reset' });
+    Actions.mainTab({ type: 'reset' });
   };
 };
 
@@ -37,4 +37,3 @@ export const taskFetch = () => {
       });
   };
 };
-

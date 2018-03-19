@@ -1,7 +1,5 @@
 import React, { Component } from 'react';  // 'react' inside node_modules folder installed by npm
 import {
-  Text,
-  View,
   Alert
 } from 'react-native';
 import firebase from 'firebase';
