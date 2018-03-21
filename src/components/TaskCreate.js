@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     paddingRight: 15
   },
   input: {
-    placeholderTextColor: '#939799',
+    //Color: '#939799',
     color: '#000000',
     fontSize: 20,
     fontWeight: 'bold',
