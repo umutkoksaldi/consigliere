@@ -1,5 +1,6 @@
 # consigliere
-
+## Inshallah we can run on both platforms
+### Deleted get current location function since ios simulator does not support it
 ---------------------
   UI & Data Tier
 ---------------------

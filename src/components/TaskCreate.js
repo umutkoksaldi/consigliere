@@ -47,7 +47,7 @@ class TaskCreate extends Component {
             <MapView.Marker
                 coordinate={{ latitude: this.props.lat,
                               longitude: this.props.long }}
-                style={{ pinColor: '#9D1017' }}
+                //style={{ pinColor: '#9D1017' }}
             >
             </MapView.Marker>
           </MapView>

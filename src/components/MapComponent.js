@@ -68,7 +68,7 @@ class MapComponent extends Component {
             <MapView.Marker
                 coordinate={{ latitude: this.props.latitude,
                               longitude: this.props.longitude }}
-                style={{ pinColor: '#9D1017' }}
+                //style={{ pinColor: '#9D1017' }}
             >
 
               <MapView.Callout onPress={this.onCalloutPress.bind(this)}>

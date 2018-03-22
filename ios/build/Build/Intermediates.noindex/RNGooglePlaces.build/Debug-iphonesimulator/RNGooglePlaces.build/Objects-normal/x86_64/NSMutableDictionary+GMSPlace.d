@@ -1,0 +1,28 @@
+dependencies: \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/node_modules/react-native-google-places/ios/NSMutableDictionary+GMSPlace.m \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/node_modules/react-native-google-places/ios/NSMutableDictionary+GMSPlace.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/node_modules/react-native-google-places/ios/../../../ios/Pods/GooglePlaces/Frameworks/GooglePlaces.framework/Modules/module.modulemap \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/node_modules/react-native-google-places/ios/../../../ios/Pods/GoogleMaps/Base/Frameworks/GoogleMapsBase.framework/Modules/module.modulemap \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/node_modules/react-native-google-places/ios/../../../ios/Pods/GoogleMaps/Base/Frameworks/GoogleMapsBase.framework/Headers/GMSDeprecationMacros.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/node_modules/react-native-google-places/ios/../../../ios/Pods/GoogleMaps/Base/Frameworks/GoogleMapsBase.framework/Headers/GMSCoordinateBounds.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/node_modules/react-native-google-places/ios/../../../ios/Pods/GoogleMaps/Base/Frameworks/GoogleMapsBase.framework/Headers/GMSCompatabilityMacros.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/node_modules/react-native-google-places/ios/../../../ios/Pods/GoogleMaps/Base/Frameworks/GoogleMapsBase.framework/Headers/GoogleMapsBase.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/node_modules/react-native-google-places/ios/../../../ios/Pods/GooglePlaces/Frameworks/GooglePlaces.framework/Headers/GMSUserAddedPlace.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/node_modules/react-native-google-places/ios/../../../ios/Pods/GooglePlaces/Frameworks/GooglePlaces.framework/Headers/GMSPlacesErrors.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/node_modules/react-native-google-places/ios/../../../ios/Pods/GooglePlaces/Frameworks/GooglePlaces.framework/Headers/GMSPlacesClient.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/node_modules/react-native-google-places/ios/../../../ios/Pods/GooglePlaces/Frameworks/GooglePlaces.framework/Headers/GMSPlaceTypes.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/node_modules/react-native-google-places/ios/../../../ios/Pods/GooglePlaces/Frameworks/GooglePlaces.framework/Headers/GMSPlacePhotoMetadataList.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/node_modules/react-native-google-places/ios/../../../ios/Pods/GooglePlaces/Frameworks/GooglePlaces.framework/Headers/GMSPlacePhotoMetadata.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/node_modules/react-native-google-places/ios/../../../ios/Pods/GooglePlaces/Frameworks/GooglePlaces.framework/Headers/GMSPlaceLikelihoodList.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/node_modules/react-native-google-places/ios/../../../ios/Pods/GooglePlaces/Frameworks/GooglePlaces.framework/Headers/GMSPlaceLikelihood.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/node_modules/react-native-google-places/ios/../../../ios/Pods/GooglePlaces/Frameworks/GooglePlaces.framework/Headers/GMSAddressComponent.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/node_modules/react-native-google-places/ios/../../../ios/Pods/GooglePlaces/Frameworks/GooglePlaces.framework/Headers/GMSAutocompleteViewController.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/node_modules/react-native-google-places/ios/../../../ios/Pods/GooglePlaces/Frameworks/GooglePlaces.framework/Headers/GMSAutocompleteTableDataSource.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/node_modules/react-native-google-places/ios/../../../ios/Pods/GooglePlaces/Frameworks/GooglePlaces.framework/Headers/GMSPlace.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/node_modules/react-native-google-places/ios/../../../ios/Pods/GooglePlaces/Frameworks/GooglePlaces.framework/Headers/GMSAutocompleteResultsViewController.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/node_modules/react-native-google-places/ios/../../../ios/Pods/GooglePlaces/Frameworks/GooglePlaces.framework/Headers/GMSAutocompletePrediction.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/node_modules/react-native-google-places/ios/../../../ios/Pods/GooglePlaces/Frameworks/GooglePlaces.framework/Headers/GMSAutocompleteMatchFragment.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/node_modules/react-native-google-places/ios/../../../ios/Pods/GooglePlaces/Frameworks/GooglePlaces.framework/Headers/GMSAutocompleteFilter.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/node_modules/react-native-google-places/ios/../../../ios/Pods/GooglePlaces/Frameworks/GooglePlaces.framework/Headers/GMSAutocompleteFetcher.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/node_modules/react-native-google-places/ios/../../../ios/Pods/GooglePlaces/Frameworks/GooglePlaces.framework/Headers/GMSAutocompleteBoundsMode.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/node_modules/react-native-google-places/ios/../../../ios/Pods/GooglePlaces/Frameworks/GooglePlaces.framework/Headers/GooglePlaces.h
