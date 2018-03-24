@@ -16,7 +16,7 @@
   7. On asynchronous Firebase call at Tasks tab, there is no spinner to be shown in the wait time -> add a Spinner
   8. Add 'Add' button ( '+' Icon preferred) and connect it to TaskCreate.js
   
-    LOGINFORM.JS
+    LOGINFORM.JS SELIN
   9. No Register button as in UI Mockup and no SignUp functionality -> add the text, button and the functionality
   
     MAINTAB.JS
