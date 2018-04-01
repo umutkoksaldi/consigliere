@@ -18,12 +18,13 @@
   
     LOGINFORM.JS SELIN
   9. No Register button as in UI Mockup and no SignUp functionality -> add the text, button and the functionality
+  10. User session working but no indicator for session check on login screen -> add spinner
   
     MAINTAB.JS
-  10. In RouterComponent.js, add a right button for 'Logout' (Icon preferred) and add the Logout functionality
+  11. In RouterComponent.js, add a right button for 'Logout' (Icon preferred) and add the Logout functionality
   
   
- *** 11. Currently when you exit the app, you log out -> make logins persistent
+ *** 12. Currently when you exit the app, you log out -> make logins persistent
 
 
 ---------------------
