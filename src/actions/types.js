@@ -6,6 +6,7 @@ export const LOGIN_USER_START = 'login_user_start';
 export const TASK_UPDATE = 'task_update';
 export const TASK_CREATE = 'task_create';
 export const TASK_FETCH = 'task_fetch';
+export const DISTANCE_FETCH_SUCCESS = 'distance_fetch_success';
 export const TASK_FETCH_SUCCESS = 'task_fetch_success';
 export const MAP_INITIALIZE = 'map_initialize';
 export const MAP_INITIALIZE_START = 'map_initialize_start';

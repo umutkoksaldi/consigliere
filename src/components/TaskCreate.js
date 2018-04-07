@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Text, View, Alert, StyleSheet } from 'react-native';
+import { Text, View, Alert, StyleSheet, Keyboard } from 'react-native';
 import MapView from 'react-native-maps';
 import { Button, Item, Input } from 'native-base';
+import DateTimePicker from 'react-native-modal-datetime-picker';
 import { taskUpdate, taskCreate } from '../actions';
 
 class TaskCreate extends Component {
+  state = {
+    isDateTimePickerVisible: false,
+  };
 
   onDoneButtonPress() {
     const { taskName, time, placeId } = this.props;
@@ -13,13 +17,29 @@ class TaskCreate extends Component {
     this.props.taskCreate({ taskName, time, placeId });
   }
 
+  onTimeFocus() {
+    this.setState({ isDateTimePickerVisible: true });
+  }
+
+  hideDateTimePicker() {
+    this.setState({ isDateTimePickerVisible: false });
+    Keyboard.dismiss();
+  }
+
+  handleDatePicked = (date) => {
+    this.hideDateTimePicker();
+    const value = date.toLocaleTimeString();
+    this.props.taskUpdate({ prop: 'time', value });
+  };
+
+
   render() {
     return (
       <View>
         <Item underline style={{ marginLeft: 20, marginRight: 20, marginBottom: 5 }}>
           <Input
             label="taskName"
-            placeholder="Visit Grandma"
+            placeholder="task name..."
             style={styles.input}
             value={this.props.taskName}
             onChangeText={value => this.props.taskUpdate({ prop: 'taskName', value })}
@@ -29,12 +49,19 @@ class TaskCreate extends Component {
         <Item underline style={{ marginLeft: 20, marginRight: 20 }}>
           <Input
             label="time"
-            placeholder="5 pm"
+            placeholder="time..."
             style={styles.input}
             value={this.props.time}
-            onChangeText={value => this.props.taskUpdate({ prop: 'time', value })}
+            onFocus={this.onTimeFocus.bind(this)}
           />
         </Item>
+
+        <DateTimePicker
+          mode='time'
+          isVisible={this.state.isDateTimePickerVisible}
+          onConfirm={this.handleDatePicked}
+          onCancel={this.hideDateTimePicker}
+        />
 
         <View style={styles.mapContainer}>
           <MapView

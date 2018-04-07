@@ -1,4 +1,4 @@
-#Mon Mar 19 22:32:21 EET 2018
-base.0=/home/kucukbays/Desktop/consigliere/android/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main
+#Sat Apr 07 23:23:24 EET 2018
+base.0=/home/kucukbays/Desktop/git-consigliere/consigliere/android/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main
 renamed.0=classes.dex
-file.0=/home/kucukbays/Desktop/consigliere/android/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex
+file.0=/home/kucukbays/Desktop/git-consigliere/consigliere/android/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex
