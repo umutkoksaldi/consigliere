@@ -4,7 +4,7 @@
   UI & Data Tier
 ---------------------
 
-    #### TASKCREATE.JS    UMUT
+    TASKCREATE.JS    UMUT
   - [ ] 1. "Change Type" button in TaskCreate component file -> convert it to a Picker and store the value
   - [ ] 2. "Set Reminder" button currently saving the Task data to Firebase -> convert it in a way that it holds the push notif. time
   - [x] 3. [FURKIE] "Time" text input currently getting a string -> convert it to a Picker as in Alarm on iOS
