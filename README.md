@@ -10,11 +10,11 @@
   - [x] 3. [ FURKIE ] "Time" text input currently getting a string -> convert it to a Picker as in Alarm on iOS
   
     #### TASKLIST.JS
-  - [ ] 4. Task List currently is listing the names -> convert it to native-base SwipeableRow component (rightSwipe: delete the task from database / leftSwipe: get the user to the Task Edit screen which is basically TaskCreate.js) ORHCA
+  - [x] 4. Task List currently is listing the names -> convert it to native-base SwipeableRow component (rightSwipe: delete the task from database / leftSwipe: get the user to the Task Edit screen which is basically TaskCreate.js) ORHCA
   - [ ] 5. List just shows name -> add "location name | time" as a sub-text as in our mockup UI.
   - [ ] 6. Currently no List Separation as Tomorrow, Today etc. (bcos we do not hold the date data for tasks) -> add date in TaskCreate and display the tasks according to date using ListDivider in native-base
-  - [ ] 7. On asynchronous Firebase call at Tasks tab, there is no spinner to be shown in the wait time -> add a Spinner
-  - [ ] 8. Add 'Add' button ( '+' Icon preferred) and connect it to TaskCreate.js
+  - [x] 7. On asynchronous Firebase call at Tasks tab, there is no spinner to be shown in the wait time -> add a Spinner
+  - [x] 8. Add 'Add' button ( '+' Icon preferred) and connect it to TaskCreate.js
   
     #### LOGINFORM.JS     SELIN
   - [ ] 9. No Register button as in UI Mockup and no SignUp functionality -> add the text, button and the functionality
