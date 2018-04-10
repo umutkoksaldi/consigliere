@@ -37,6 +37,7 @@ export const taskFetch = () => {
   const { currentUser } = firebase.auth();
 
   return (dispatch) => {
+    dispatch({ type: TASK_FETCH });
     firebase.database().ref(`/users/${currentUser.uid}/tasks`)
       .on('value', snapshot => {
         dispatch({
@@ -72,4 +73,13 @@ export const distanceFetch = ({ todayTasks }) => {
       type: DISTANCE_FETCH_SUCCESS
     });
   };
+};
+
+export const taskDelete = ({ uid }) => {
+  const { currentUser } = firebase.auth();
+
+    return () => {
+        firebase.database().ref(`users/${currentUser.uid}/tasks/${uid}`)
+            .remove();
+    };
 };

@@ -7,6 +7,7 @@ class MainPage extends Component {
   render() {
     return (
         <Tabs
+          locked
           initialPage={0}
           style={{ marginTop: -11 }}
           tabBarPosition='overlayTop'

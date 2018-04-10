@@ -1,0 +1,21 @@
+dependencies: \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/node_modules/react-native/Libraries/Text/RCTText.m \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/node_modules/react-native/Libraries/Text/RCTText.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTUtils.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTAssert.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTDefines.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/ios/build/Build/Products/Debug-iphonesimulator/include/React/UIView+React.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTComponent.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGEnums.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/node_modules/react-native/Libraries/Text/RCTShadowText.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTShadowView.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTRootView.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridge.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeDelegate.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTJavaScriptLoader.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeModule.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTFrameUpdate.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTInvalidating.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/Yoga.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTTextDecorationLineType.h

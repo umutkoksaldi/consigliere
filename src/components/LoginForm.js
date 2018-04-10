@@ -53,7 +53,7 @@ class LoginForm extends Component {
             iconSize={18}
             iconColor={'rgb(255, 255, 255)'}
             placeholder={'Email Address'}
-            placeholderTextColor='#FFFFFF'
+            //placeholderTextColor='#FFFFFF'
             onChangeText={this.onEmailChange.bind(this)}
             value={this.props.email}
           />
@@ -65,7 +65,7 @@ class LoginForm extends Component {
             iconSize={23}
             iconColor={'rgb(255, 255, 255)'}
             placeholder={'Password'}
-            placeholderTextColor='#FFFFFF'
+            //placeholderTextColor='#FFFFFF'
             secureTextEntry
             onChangeText={this.onPasswordChange.bind(this)}
             value={this.props.password}

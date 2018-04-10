@@ -9,7 +9,15 @@ import {
 export const mapInitialize = () => {
   return (dispatch) => {
     dispatch({ type: MAP_INITIALIZE_START });
+    // const lat = 38.3553627;
+    // const long = 38.33352470000001;
+    // const name = 'malatya';
+    // const placeId = 'ChIJrUs8kuQ2dkARG0hf3kjsU6A';
 
+    //     dispatch({
+    //       type: MAP_INITIALIZE,
+    //       payload: { lat, long, name, placeId }
+    //     });
     RNGooglePlaces.getCurrentPlace()
       .then((results) => {
         const lat = results[0].latitude;

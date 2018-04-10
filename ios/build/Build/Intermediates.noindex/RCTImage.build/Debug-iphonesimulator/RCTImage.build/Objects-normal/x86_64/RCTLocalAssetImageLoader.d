@@ -1,0 +1,25 @@
+dependencies: \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/node_modules/react-native/Libraries/Image/RCTLocalAssetImageLoader.m \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/node_modules/react-native/Libraries/Image/RCTLocalAssetImageLoader.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTImageLoader.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridge.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeDelegate.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTJavaScriptLoader.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTDefines.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeModule.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTFrameUpdate.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTInvalidating.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTResizeMode.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTConvert.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTAnimationType.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBorderStyle.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTLog.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTAssert.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTUtils.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTPointerEvents.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTTextDecorationLineType.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/Yoga.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGEnums.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTURLRequestHandler.h \
+  /Users/orhuncaglayan/reactNativeProjects/consigliere/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTURLRequestDelegate.h

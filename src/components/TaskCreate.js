@@ -74,7 +74,7 @@ class TaskCreate extends Component {
             <MapView.Marker
                 coordinate={{ latitude: this.props.lat,
                               longitude: this.props.long }}
-                style={{ pinColor: '#9D1017' }}
+                //style={{ pinColor: '#9D1017' }}
             >
             </MapView.Marker>
           </MapView>
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     paddingRight: 15
   },
   input: {
-    placeholderTextColor: '#939799',
+    //Color: '#939799',
     color: '#000000',
     fontSize: 20,
     fontWeight: 'bold',
