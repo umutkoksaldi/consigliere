@@ -1,5 +1,7 @@
 import React from 'react';
-import { Scene, Router } from 'react-native-router-flux';
+import { StyleSheet, TouchableOpacity } from 'react-native';
+import { Button, Icon } from 'native-base';
+import { Scene, Router, Actions } from 'react-native-router-flux';
 import LoginForm from './components/LoginForm';
 import TaskCreate from './components/TaskCreate';
 import MainPage from './components/MainPage';
@@ -23,6 +25,12 @@ const RouterComponent = () => {
       <Scene key="main" >
         <Scene
           key="mainTab"
+          renderRightButton={() => 
+            <TouchableOpacity onPress={() => Actions.taskComponent()}>
+                <Icon active name="add" style={{ color: '#FFF' }} />
+            </TouchableOpacity>
+          }
+          rightButtonStyle={styles.rightButtonStyle}
           title="consigliere"
           titleStyle={{ color: '#FFF', fontWeight: 'bold', fontSize: 20, marginBottom: 3 }}
           component={MainPage}
@@ -47,5 +55,12 @@ const RouterComponent = () => {
     </Router>
   );
 };
+const styles = StyleSheet.create({
+  rightButtonStyle: {
+    marginBottom: 0,
+    marginRight: 5
+  },
 
+
+});
 export default RouterComponent;
