@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, Keyboard, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { Button, Spinner } from 'native-base';
-import { emailChanged, passwordChanged, loginUser } from '../actions';
+import { emailChanged, passwordChanged, loginUser, checkSession } from '../actions';
 import { CardSection, Input } from './common';
 
 class LoginForm extends Component {
@@ -19,6 +19,10 @@ class LoginForm extends Component {
 
     Keyboard.dismiss();
     this.props.loginUser({ email, password });
+  }
+
+  componentWillMount() {
+    this.props.checkSession();
   }
 
   renderButton() {
@@ -45,44 +49,52 @@ class LoginForm extends Component {
   }
 
   render() {
-    return (
-      <View style={styles.loginFormStyle}>
-        <View style={styles.inputContainerStyle}>
-          <Input
-            icon={'envelope'}
-            iconSize={18}
-            iconColor={'rgb(255, 255, 255)'}
-            placeholder={'Email Address'}
-            //placeholderTextColor='#FFFFFF'
-            onChangeText={this.onEmailChange.bind(this)}
-            value={this.props.email}
-          />
+    if (!this.props.session)
+      return (
+        <View style={styles.loginFormStyle}>
+          <View style={styles.inputContainerStyle}>
+            <Input
+              icon={'envelope'}
+              iconSize={18}
+              iconColor={'rgb(255, 255, 255)'}
+              placeholder={'Email Address'}
+              //placeholderTextColor='#FFFFFF'
+              onChangeText={this.onEmailChange.bind(this)}
+              value={this.props.email}
+            />
+          </View>
+
+          <View style={styles.inputContainerStyle}>
+            <Input
+              icon={'lock'}
+              iconSize={23}
+              iconColor={'rgb(255, 255, 255)'}
+              placeholder={'Password'}
+              //placeholderTextColor='#FFFFFF'
+              secureTextEntry
+              onChangeText={this.onPasswordChange.bind(this)}
+              value={this.props.password}
+            />
+          </View>
+
+          <Text>
+            {this.props.error}
+          </Text>
+
+          <CardSection>
+            {this.renderButton()}
+          </CardSection>
+
         </View>
 
-        <View style={styles.inputContainerStyle}>
-          <Input
-            icon={'lock'}
-            iconSize={23}
-            iconColor={'rgb(255, 255, 255)'}
-            placeholder={'Password'}
-            //placeholderTextColor='#FFFFFF'
-            secureTextEntry
-            onChangeText={this.onPasswordChange.bind(this)}
-            value={this.props.password}
-          />
-        </View>
-
-        <Text>
-          {this.props.error}
-        </Text>
-
-        <CardSection>
-          {this.renderButton()}
-        </CardSection>
-
-      </View>
-
-    );
+      );
+    else
+      return (
+        <Spinner
+          color='#9D1017'
+          style={{ flex: 1 }}
+        />
+      );
   }
 }
 
@@ -91,7 +103,8 @@ const mapStateToProps = state => {
     email: state.auth.email,
     password: state.auth.password,
     error: state.auth.error,
-    loading: state.auth.loading
+    loading: state.auth.loading,
+    session: state.auth.session
   };
 };
 
@@ -128,4 +141,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default connect(mapStateToProps, { emailChanged, passwordChanged, loginUser })(LoginForm);
+export default connect(mapStateToProps, { emailChanged, passwordChanged, loginUser, checkSession })(LoginForm);

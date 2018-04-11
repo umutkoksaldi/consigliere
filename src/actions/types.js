@@ -13,3 +13,5 @@ export const TASK_DELETE_SUCCESS = 'task_delete_success';
 export const MAP_INITIALIZE = 'map_initialize';
 export const MAP_INITIALIZE_START = 'map_initialize_start';
 export const MAP_SEARCH = 'map_search';
+export const CHECK_SESSION_START = 'check_session_start';
+export const CHECK_SESSION_FAIL = 'check_session_fail';

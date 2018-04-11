@@ -4,7 +4,9 @@ import { EMAIL_CHANGED,
         PASSWORD_CHANGED,
         LOGIN_USER_SUCCESS,
         LOGIN_USER_FAIL,
-        LOGIN_USER_START } from './types';
+        LOGIN_USER_START,
+        CHECK_SESSION_START, 
+        CHECK_SESSION_FAIL } from './types';
 
 export const emailChanged = (text) => {
   return {
@@ -29,6 +31,24 @@ export const loginUser = ({ email, password }) => {
       .catch(() => loginUserFail(dispatch));
   };
 };
+
+export const checkSession = () => {
+  return (dispatch) => {
+    dispatch({ type: CHECK_SESSION_START });
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        loginUserSuccess(dispatch, user);
+      }
+      else {
+        checkSessionFail(dispatch);
+      }
+    });
+  };
+}
+
+const checkSessionFail = (dispatch) => {
+  dispatch({ type: CHECK_SESSION_FAIL });
+}
 
 const loginUserFail = (dispatch) => {
   dispatch({
