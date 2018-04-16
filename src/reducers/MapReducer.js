@@ -2,7 +2,9 @@ import { Alert } from 'react-native';
 import {
   MAP_INITIALIZE,
   MAP_INITIALIZE_START,
-  MAP_SEARCH
+  MAP_SEARCH,
+  PLACEID_SEARCH,
+  LAT_LONG_SEARCH
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -34,6 +36,24 @@ export default (state = INITIAL_STATE, action) => {
           loading: true
         };
       case MAP_SEARCH:
+        return {
+          ...state,
+          latitude: action.payload.lat,
+          longitude: action.payload.long,
+          name: action.payload.name,
+          address: action.payload.address,
+          placeId: action.payload.placeId
+        };
+      case PLACEID_SEARCH:
+        return {
+          ...state,
+          latitude: action.payload.lat,
+          longitude: action.payload.long,
+          name: action.payload.name,
+          address: action.payload.address,
+          placeId: action.payload.placeId
+        };
+      case LAT_LONG_SEARCH:
         return {
           ...state,
           latitude: action.payload.lat,

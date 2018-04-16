@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Text, View, Alert, StyleSheet, Keyboard } from 'react-native';
-import MapView from 'react-native-maps';
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import { Button, Item, Input } from 'native-base';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { taskUpdate, taskCreate } from '../actions';
@@ -10,15 +11,24 @@ class TaskCreate extends Component {
   state = {
     isDateTimePickerVisible: false,
   };
-
+  componentWillMount() {
+    _.each(this.props.task, (value, prop) => {
+      console.log(prop, value);
+      this.props.taskUpdate({ prop, value });
+    });
+    console.log(this.props);
+}
   onDoneButtonPress() {
-    const { taskName, time, placeId } = this.props;
+    const { taskName, time, placeId, lat, long, uid } = this.props;
 
-    this.props.taskCreate({ taskName, time, placeId });
+    this.props.taskCreate({ taskName, time, placeId, lat, long, uid });
   }
 
   onTimeFocus() {
     this.setState({ isDateTimePickerVisible: true });
+  }
+  onLongPress = (e) => {
+    console.log(e.nativeEvent.coordinate);
   }
 
   hideDateTimePicker() {
@@ -65,6 +75,8 @@ class TaskCreate extends Component {
 
         <View style={styles.mapContainer}>
           <MapView
+            onLongPress={this.onLongPress}
+            provider={PROVIDER_GOOGLE}
             region={{ latitude: this.props.lat,
                       longitude: this.props.long,
                       longitudeDelta: this.props.longDelta,
@@ -75,8 +87,7 @@ class TaskCreate extends Component {
                 coordinate={{ latitude: this.props.lat,
                               longitude: this.props.long }}
                 //style={{ pinColor: '#9D1017' }}
-            >
-            </MapView.Marker>
+            />
           </MapView>
         </View>
 
@@ -107,9 +118,9 @@ class TaskCreate extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { taskName, time } = state.taskForm;
+  const { taskName, time, lat, long, placeId, uid } = state.taskForm;
 
-  return { taskName, time };
+  return { taskName, time, lat, long, placeId, uid };
 };
 
 const styles = StyleSheet.create({
@@ -139,7 +150,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   mapContainer: {
-    height: '30%',
+    height: '50%',
     width: '90%',
     borderWidth: 5,
     borderColor: '#9D1017',

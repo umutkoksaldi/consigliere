@@ -15,3 +15,6 @@ export const MAP_INITIALIZE_START = 'map_initialize_start';
 export const MAP_SEARCH = 'map_search';
 export const CHECK_SESSION_START = 'check_session_start';
 export const CHECK_SESSION_FAIL = 'check_session_fail';
+export const PLACEID_SEARCH = 'placeid_search';
+export const LAT_LONG_SEARCH = 'lat_long_search';
+export const TASK_UPDATE_SUCCESS = 'task_update_success';
