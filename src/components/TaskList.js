@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-import { View, Text, ListView, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, ListView, StyleSheet, Dimensions, Alert } from 'react-native';
 import { List, ListItem, Button, Icon } from 'native-base';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
@@ -32,10 +32,19 @@ class TaskList extends Component {
     this.props.distanceFetch({ todayTasks });
   }
 
-  onDeleteTask(taskItem, secId, rowId, rowMap) { 
-    const { uid } = taskItem;
+  onDeleteTask(taskItem, secId, rowId, rowMap) {
+    const { uid, taskName, time } = taskItem;
     console.log(uid);
-    this.props.taskDelete({ uid });
+    Alert.alert(
+      'Delete this task?',
+      `${taskName}\n${time}`,
+      [
+        { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+        { text: 'OK', onPress: () => this.props.taskDelete({ uid }) },
+      ],
+      { cancelable: false }
+    );
+    
   }
   createDataSource({ taskArray }) {
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
@@ -60,7 +69,7 @@ class TaskList extends Component {
                   <Text style={{ textAlign: 'left', fontSize: 18 }}>{taskItem.taskName}</Text>
                 </View>
                 <View style={{ marginTop: 5 }}>
-                  <Text style={{ textAlign: 'left', marginLeft: 10, fontSize: 14 }}>{taskItem.taskName}</Text>
+                  <Text style={{ textAlign: 'left', marginLeft: 10, fontSize: 14 }}>{taskItem.time}</Text>
                 </View>
               </ListItem>
             }

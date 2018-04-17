@@ -74,12 +74,12 @@ export const placeIdSearch = (placeId) => {
 export const latLongSearch = (lat, long) => {
   console.log({ lat, long });
   return (dispatch) => {
-    axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${long}&radius=10&key=${GOOGLE_MAPS_API_KEY}`)
+    axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${long}&radius=50&key=${GOOGLE_MAPS_API_KEY}`)
     .then(response => {
       const info = response.data.results[0]; 
       dispatch({
         type: LAT_LONG_SEARCH,
-        payload: { lat: info.geometry.location.lat, long: info.geometry.location.lng, name: info.name, address: info.formatted_address, placeId: info.place_id } 
+        payload: { lat: info.geometry.location.lat, long: info.geometry.location.lng, name: info.name, address: info.vicinity, placeId: info.place_id } 
       });
     });
   };
