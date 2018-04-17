@@ -43,6 +43,7 @@ class MapComponent extends Component {
   }
 
   onCalloutPress() {
+    console.log(this.props.address);
     Actions.taskComponent({
       task: {
       taskName: '',
