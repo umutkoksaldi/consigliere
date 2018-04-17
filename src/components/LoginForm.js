@@ -1,9 +1,25 @@
-import React, { Component } from 'react';
-import { Text, View, Keyboard, StyleSheet } from 'react-native';
-import { connect } from 'react-redux';
-import { Button, Spinner } from 'native-base';
-import { emailChanged, passwordChanged, loginUser, checkSession } from '../actions';
-import { CardSection, Input } from './common';
+import React, { Component } from "react";
+import {
+  Text,
+  View,
+  Keyboard,
+  StyleSheet,
+  ImageBackground,
+  TouchableHighlight
+} from "react-native";
+import { connect } from "react-redux";
+import { Button, Spinner } from "native-base";
+import {
+  emailChanged,
+  passwordChanged,
+  loginUser,
+  signuprequest,
+  passwordforgot,checkSession
+} from "../actions";
+import { CardSection, Input } from "./common";
+import { Hoshi} from 'react-native-textinput-effects';
+
+
 
 class LoginForm extends Component {
   onEmailChange(text) {
@@ -14,87 +30,121 @@ class LoginForm extends Component {
     this.props.passwordChanged(text);
   }
 
-  onButtonPress() {
+  onButtonPress1() {
     const { email, password } = this.props;
-
     Keyboard.dismiss();
     this.props.loginUser({ email, password });
   }
-
+  onButtonPress2() {
+    Keyboard.dismiss();
+    signuprequest();
+  }
+  onButtonPress3() {
+    Keyboard.dismiss();
+    passwordforgot();
+  }
   componentWillMount() {
     this.props.checkSession();
-  }
-
-  renderButton() {
+   }
+  renderButton1() {
     if (this.props.loading) {
-      return (
-        <Spinner
-          color='#FFFFFF'
-          style={{ marginLeft: '45%' }}
-        />
-      );
+      return <Spinner color="#eff0f2" style={{ marginLeft: "45%" }} />;
     }
-
+ 
     return (
       <Button
-        transparent
-        style={styles.buttonStyle}
-        onPress={this.onButtonPress.bind(this)}
+        style={styles.loginButtonStyle}
+        onPress={this.onButtonPress1.bind(this)}
       >
-        <Text style={styles.buttonTextStyle} >
-          Login
-        </Text>
+        <Text style={styles.loginTextStyle}>Login</Text>
       </Button>
     );
   }
 
   render() {
     if (!this.props.session)
-      return (
-        <View style={styles.loginFormStyle}>
-          <View style={styles.inputContainerStyle}>
-            <Input
-              icon={'envelope'}
-              iconSize={18}
-              iconColor={'rgb(255, 255, 255)'}
-              placeholder={'Email Address'}
-              //placeholderTextColor='#FFFFFF'
-              onChangeText={this.onEmailChange.bind(this)}
-              value={this.props.email}
-            />
-          </View>
+    return (
+      <ImageBackground
+        source={require("../img/bglogin2.png")}
+        style={{ width: "100%", height: "100%" }}
+      >
+        <View
+          style={{
+            justifyContent: "center",
+            alignSelf: "stretch",
+            flex: 1,
+            flexDirection: "column"
+          }}
+        >
+          
+        <View style={styles.inputContainerStyle}>
+        <Hoshi
+        label={'E-mail Address'}
+        borderColor={'#660507'}
+        backgroundColor={'transparent'}
+        onChangeText={this.onEmailChange.bind(this)}
+        value={this.props.email}
+        autoCorrect={false}
+        autoCapitalize="none"
+        keyboardType = 'email-address'
+        clearButtonMode= 'while-editing'
+        inputStyle={{ color: '#000',fontSize:15,fontWeight:'normal' }}
 
-          <View style={styles.inputContainerStyle}>
-            <Input
-              icon={'lock'}
-              iconSize={23}
-              iconColor={'rgb(255, 255, 255)'}
-              placeholder={'Password'}
-              //placeholderTextColor='#FFFFFF'
-              secureTextEntry
-              onChangeText={this.onPasswordChange.bind(this)}
-              value={this.props.password}
-            />
-          </View>
+      />
+      </View>
 
-          <Text>
-            {this.props.error}
-          </Text>
+      <View style={styles.inputContainerStyle}>
+      <Hoshi
+      label={'Password'}
+      borderColor={'#660507'}
+      backgroundColor={'transparent'}
+      inputStyle={{ color: '#000',fontSize:15,fontWeight:'normal' }}
+      secureTextEntry
+      onChangeText={this.onPasswordChange.bind(this)}
+      value={this.props.password}
+      clearButtonMode= 'while-editing'
 
+      autoCorrect={false}
+      autoCapitalize="none"
+    />
+    </View>
+          <View style={{ height: 30 }} />
+
+          {this.renderButton1()}
           <CardSection>
-            {this.renderButton()}
+            <Text style={styles.textStyle}>Forgot your login details?</Text>
           </CardSection>
-
+          <CardSection>
+            <TouchableHighlight
+              style={styles.forgotButtonStyle}
+              underlayColor="white"
+              onPress={this.onButtonPress3.bind(this)}
+            >
+              <Text style={styles.forgotTextStyle}>Get help signing in.</Text>
+            </TouchableHighlight>
+          </CardSection>
+          
         </View>
-
-      );
+        <View style={{ height: 10 }} />
+        <View style={styles.container}>
+          <Text style={styles.textStyle2}>Don't have an account?</Text>
+          <TouchableHighlight
+            style={styles.SignupButtonStyle}
+            underlayColor="white"
+            onPress={this.onButtonPress2.bind(this)}
+          >
+            <Text style={styles.signupTextStyle}>Sign up!</Text>
+          </TouchableHighlight>
+        </View>
+      </ImageBackground>
+    );
     else
-      return (
-        <Spinner
-          color='#9D1017'
-          style={{ flex: 1 }}
-        />
-      );
+          return (
+            <Spinner
+              color='#9D1017'
+              style={{ flex: 1 }}
+            />
+          );
   }
 }
 
@@ -109,36 +159,92 @@ const mapStateToProps = state => {
 };
 
 const styles = StyleSheet.create({
-  loginFormStyle: {
-    ...StyleSheet.absoluteFillObject,
+  container: {
+    flexDirection: "row",
+    justifyContent: "center",
+    height: 50
+  },
+  backGroundImageStyle: {
     flex: 1,
-    alignSelf: 'stretch',
-    backgroundColor: '#9D1017',
-    justifyContent: 'center',
+    resizeMode: "stretch",
+    justifyContent: "center"
   },
   inputContainerStyle: {
-    borderBottomWidth: 1,
-    borderColor: '#FFFFFF',
+    borderColor: "#000000",
     height: 50,
-    alignSelf: 'stretch',
-    marginLeft: 30,
+    alignSelf: "stretch",
+    marginLeft: 20,
     marginRight: 30,
-    marginTop: 10,
-    backgroundColor: 'transparent',
+    marginTop: 20,
+    backgroundColor: "transparent"
   },
-  buttonStyle: {
-    marginLeft: '43%',
-    marginTop: 5
+  SignupButtonStyle: {
+    justifyContent: "space-between",
+    flex: 1
   },
-  buttonTextStyle: {
-    alignSelf: 'center',
-    color: '#FFFFFF',
+  forgotButtonStyle: {
+    marginLeft: "30%",
+    marginTop: 5,
+    justifyContent: "center",
+    alignSelf: "stretch",
+    alignItems: "center"
+  },
+  loginButtonStyle: {
+    marginLeft: 20,
+    marginRight: 30,
+    backgroundColor:'#00688b',
+    alignSelf: "stretch",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  forgotTextStyle: {
+    alignSelf: "center",
+    color: "#00688b",
+    fontSize: 14,
+    fontWeight: "600",
+    paddingTop: 0,
+    paddingBottom: 10,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  signupTextStyle: {
+    alignSelf: "flex-start",
+    color: '#00688b',
+    
+    fontSize: 14,
+    fontWeight: "600",
+    paddingTop: 0,
+    paddingBottom: 10
+  },
+  loginTextStyle: {
+    alignSelf: "center",
+    color: "#ffffff",
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: "600",
     paddingTop: 10,
     paddingBottom: 10
+  },
+  textStyle: {
+    fontWeight: "normal",
+    fontSize: 14,
+    marginLeft: 100,
+    marginTop: 5,
+    alignSelf: "center",
+    backgroundColor: "transparent",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  textStyle2: {
+    fontWeight: "normal",
+    fontSize: 14,
+    flex: 1,
+    marginLeft: 70,
+    backgroundColor: "transparent"
   }
-
 });
 
-export default connect(mapStateToProps, { emailChanged, passwordChanged, loginUser, checkSession })(LoginForm);
+export default connect(mapStateToProps, {
+  emailChanged,
+  passwordChanged,
+  loginUser, checkSession
+})(LoginForm);
