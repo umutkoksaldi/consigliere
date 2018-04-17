@@ -13,6 +13,21 @@ class MainPage extends Component {
           tabBarPosition='overlayTop'
           tabBarUnderlineStyle={{ borderWidth: 0, backgroundColor: '#E81721' }}
         >
+        <Tab
+        heading="Tasks"
+        tabStyle={{
+          backgroundColor: '#F8F8F8',
+          borderBottomWidth: 3,
+          borderColor: '#9CB4E8' }}
+        activeTabStyle={{
+          backgroundColor: '#F8F8F8',
+          borderBottomWidth: 3,
+          borderColor: '#E81721' }}
+        textStyle={{ color: '#9CB4E8', fontWeight: 'bold' }}
+        activeTextStyle={{ color: '#E81721', fontWeight: 'bold' }}
+      >
+        <TaskList />
+      </Tab>
           <Tab
             heading="Map"
             tabStyle={{
@@ -28,21 +43,7 @@ class MainPage extends Component {
           >
             <MapComponent />
           </Tab>
-          <Tab
-            heading="Tasks"
-            tabStyle={{
-              backgroundColor: '#F8F8F8',
-              borderBottomWidth: 3,
-              borderColor: '#9CB4E8' }}
-            activeTabStyle={{
-              backgroundColor: '#F8F8F8',
-              borderBottomWidth: 3,
-              borderColor: '#E81721' }}
-            textStyle={{ color: '#9CB4E8', fontWeight: 'bold' }}
-            activeTextStyle={{ color: '#E81721', fontWeight: 'bold' }}
-          >
-            <TaskList />
-          </Tab>
+       
         </Tabs>
 
     );
