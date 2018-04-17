@@ -1,11 +1,10 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { View, Text, ListView, StyleSheet, Dimensions, Alert } from 'react-native';
-import { List, ListItem, Button, Icon } from 'native-base';
+import { List, ListItem, Button, Icon, Spinner } from 'native-base';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { taskFetch, taskDelete } from '../actions';
-import { Spinner } from './common';
 
 const { width, height } = Dimensions.get('window');
 
@@ -55,7 +54,11 @@ class TaskList extends Component {
   render() {
     console.log(`props: ${this.props.fetching}`);
     if (this.props.fetching) {
-      return <Spinner size="large" />;
+      return (
+        <View style={styles.spinnerStyle}>
+          <Spinner color='red' size='large' />
+        </View>
+      );
     }
 
     return (
@@ -124,7 +127,12 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     alignContent: 'flex-start'
   },
-
+  spinnerStyle: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   list: {
     ...StyleSheet.absoluteFillObject,
   },

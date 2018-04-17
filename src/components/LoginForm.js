@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   Text,
   View,
@@ -6,22 +6,24 @@ import {
   StyleSheet,
   ImageBackground,
   TouchableHighlight
-} from "react-native";
-import { connect } from "react-redux";
-import { Button, Spinner } from "native-base";
+} from 'react-native';
+import { connect } from 'react-redux';
+import { Button, Spinner } from 'native-base';
+import { Hoshi } from 'react-native-textinput-effects';
 import {
   emailChanged,
   passwordChanged,
   loginUser,
   signuprequest,
-  passwordforgot,checkSession
-} from "../actions";
-import { CardSection, Input } from "./common";
-import { Hoshi} from 'react-native-textinput-effects';
-
+  passwordforgot, checkSession
+} from '../actions';
+import { CardSection } from './common';
 
 
 class LoginForm extends Component {
+  componentWillMount() {
+    this.props.checkSession();
+   }
   onEmailChange(text) {
     this.props.emailChanged(text);
   }
@@ -43,12 +45,11 @@ class LoginForm extends Component {
     Keyboard.dismiss();
     passwordforgot();
   }
-  componentWillMount() {
-    this.props.checkSession();
-   }
+  
   renderButton1() {
+    console.log(this.props.loading);
     if (this.props.loading) {
-      return <Spinner color="#eff0f2" style={{ marginLeft: "45%" }} />;
+      return <Spinner color='red' size='small' />;
     }
  
     return (
@@ -62,89 +63,89 @@ class LoginForm extends Component {
   }
 
   render() {
-    if (!this.props.session)
-    return (
-      <ImageBackground
-        source={require("../img/bglogin2.png")}
-        style={{ width: "100%", height: "100%" }}
-      >
-        <View
-          style={{
-            justifyContent: "center",
-            alignSelf: "stretch",
-            flex: 1,
-            flexDirection: "column"
-          }}
+    if (!this.props.session) {
+      return (
+        <ImageBackground
+          source={require('../img/bglogin2.png')}
+          style={{ width: '100%', height: '100%' }}
         >
-          
+          <View
+            style={{
+              justifyContent: 'center',
+              alignSelf: 'stretch',
+              flex: 1,
+              flexDirection: 'column'
+            }}
+          >
+            
         <View style={styles.inputContainerStyle}>
-        <Hoshi
-        label={'E-mail Address'}
-        borderColor={'#660507'}
-        backgroundColor={'transparent'}
-        onChangeText={this.onEmailChange.bind(this)}
-        value={this.props.email}
-        autoCorrect={false}
-        autoCapitalize="none"
-        keyboardType = 'email-address'
-        clearButtonMode= 'while-editing'
-        inputStyle={{ color: '#000',fontSize:15,fontWeight:'normal' }}
-
-      />
-      </View>
+          <Hoshi
+          label={'E-mail Address'}
+          borderColor={'#660507'}
+          backgroundColor={'transparent'}
+          onChangeText={this.onEmailChange.bind(this)}
+          value={this.props.email}
+          autoCorrect={false}
+          autoCapitalize='none'
+          keyboardType='email-address'
+          clearButtonMode='while-editing'
+          inputStyle={{ color: '#000', fontSize: 15, fontWeight: 'normal' }}
+          />
+        </View>
 
       <View style={styles.inputContainerStyle}>
-      <Hoshi
-      label={'Password'}
-      borderColor={'#660507'}
-      backgroundColor={'transparent'}
-      inputStyle={{ color: '#000',fontSize:15,fontWeight:'normal' }}
-      secureTextEntry
-      onChangeText={this.onPasswordChange.bind(this)}
-      value={this.props.password}
-      clearButtonMode= 'while-editing'
+        <Hoshi
+        label={'Password'}
+        borderColor={'#660507'}
+        backgroundColor={'transparent'}
+        inputStyle={{ color: '#000', fontSize: 15, fontWeight: 'normal' }}
+        secureTextEntry
+        onChangeText={this.onPasswordChange.bind(this)}
+        value={this.props.password}
+        clearButtonMode='while-editing'
 
-      autoCorrect={false}
-      autoCapitalize="none"
-    />
-    </View>
-          <View style={{ height: 30 }} />
-
-          {this.renderButton1()}
-          <CardSection>
-            <Text style={styles.textStyle}>Forgot your login details?</Text>
-          </CardSection>
-          <CardSection>
+        autoCorrect={false}
+        autoCapitalize='none'
+        />
+      </View>
+            <View style={{ height: 30 }} />
+            <View style={{ marginTop: 10 }}>
+            {this.renderButton1()}
+            </View>
+            <CardSection>
+              <Text style={styles.textStyle}>Forgot your login details?</Text>
+            </CardSection>
+            <CardSection>
+              <TouchableHighlight
+                style={styles.forgotButtonStyle}
+                underlayColor='white'
+                onPress={this.onButtonPress3.bind(this)}
+              >
+                <Text style={styles.forgotTextStyle}>Get help signing in.</Text>
+              </TouchableHighlight>
+            </CardSection>
+            
+          </View>
+          <View style={{ height: 10 }} />
+          <View style={styles.container}>
+            <Text style={styles.textStyle2}>Don't have an account?</Text>
             <TouchableHighlight
-              style={styles.forgotButtonStyle}
-              underlayColor="white"
-              onPress={this.onButtonPress3.bind(this)}
+              style={styles.SignupButtonStyle}
+              underlayColor='white'
+              onPress={this.onButtonPress2.bind(this)}
             >
-              <Text style={styles.forgotTextStyle}>Get help signing in.</Text>
+              <Text style={styles.signupTextStyle}>Sign up!</Text>
             </TouchableHighlight>
-          </CardSection>
-          
-        </View>
-        <View style={{ height: 10 }} />
-        <View style={styles.container}>
-          <Text style={styles.textStyle2}>Don't have an account?</Text>
-          <TouchableHighlight
-            style={styles.SignupButtonStyle}
-            underlayColor="white"
-            onPress={this.onButtonPress2.bind(this)}
-          >
-            <Text style={styles.signupTextStyle}>Sign up!</Text>
-          </TouchableHighlight>
-        </View>
-      </ImageBackground>
-    );
-    else
-          return (
-            <Spinner
-              color='#9D1017'
-              style={{ flex: 1 }}
-            />
-          );
+          </View>
+        </ImageBackground>
+      );
+    }
+    return (
+      <Spinner
+        color='#9D1017'
+        style={{ flex: 1 }}
+      />
+  );
   }
 }
 
@@ -160,91 +161,92 @@ const mapStateToProps = state => {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
-    justifyContent: "center",
+    flexDirection: 'row',
+    justifyContent: 'center',
     height: 50
   },
   backGroundImageStyle: {
     flex: 1,
-    resizeMode: "stretch",
-    justifyContent: "center"
+    resizeMode: 'stretch',
+    justifyContent: 'center'
   },
   inputContainerStyle: {
-    borderColor: "#000000",
+    borderColor: '#000000',
     height: 50,
-    alignSelf: "stretch",
+    alignSelf: 'stretch',
     marginLeft: 20,
     marginRight: 30,
     marginTop: 20,
-    backgroundColor: "transparent"
+    backgroundColor: 'transparent'
   },
   SignupButtonStyle: {
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
     flex: 1
   },
   forgotButtonStyle: {
-    marginLeft: "30%",
+    marginLeft: '30%',
     marginTop: 5,
-    justifyContent: "center",
-    alignSelf: "stretch",
-    alignItems: "center"
+    justifyContent: 'center',
+    alignSelf: 'stretch',
+    alignItems: 'center'
   },
   loginButtonStyle: {
     marginLeft: 20,
     marginRight: 30,
-    backgroundColor:'#00688b',
-    alignSelf: "stretch",
-    justifyContent: "center",
-    alignItems: "center"
+    backgroundColor: '#00688b',
+    alignSelf: 'stretch',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   forgotTextStyle: {
-    alignSelf: "center",
-    color: "#00688b",
+    alignSelf: 'center',
+    color: '#00688b',
     fontSize: 14,
-    fontWeight: "600",
+    fontWeight: '600',
     paddingTop: 0,
     paddingBottom: 10,
-    justifyContent: "center",
-    alignItems: "center"
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   signupTextStyle: {
-    alignSelf: "flex-start",
+    alignSelf: 'flex-start',
     color: '#00688b',
     
     fontSize: 14,
-    fontWeight: "600",
+    fontWeight: '600',
     paddingTop: 0,
     paddingBottom: 10
   },
   loginTextStyle: {
-    alignSelf: "center",
-    color: "#ffffff",
+    alignSelf: 'center',
+    color: '#ffffff',
     fontSize: 16,
-    fontWeight: "600",
+    fontWeight: '600',
     paddingTop: 10,
     paddingBottom: 10
   },
   textStyle: {
-    fontWeight: "normal",
+    fontWeight: 'normal',
     fontSize: 14,
     marginLeft: 100,
     marginTop: 5,
-    alignSelf: "center",
-    backgroundColor: "transparent",
-    justifyContent: "center",
-    alignItems: "center"
+    alignSelf: 'center',
+    backgroundColor: 'transparent',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   textStyle2: {
-    fontWeight: "normal",
+    fontWeight: 'normal',
     fontSize: 14,
     flex: 1,
     marginLeft: 70,
-    backgroundColor: "transparent"
+    backgroundColor: 'transparent'
   }
 });
 
 export default connect(mapStateToProps, {
   emailChanged,
   passwordChanged,
-  loginUser, checkSession
+  loginUser, 
+  checkSession
 })(LoginForm);

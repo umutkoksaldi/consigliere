@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { StyleSheet, TouchableOpacity,View, Image } from 'react-native';
+import { StyleSheet, TouchableOpacity, View, Image } from 'react-native';
 import { Button, Icon } from 'native-base';
 import { Scene, Router, Actions, Drawer } from 'react-native-router-flux';
 import LoginForm from './components/LoginForm';
@@ -9,18 +9,18 @@ import MainPage from './components/MainPage';
 import SignupForm from './components/SignupForm';
 import firebase from 'firebase';
 import ForgotPassword from './components/ForgotPassword';
-//import {logout} from "../actions";
+//import {logout} from '../actions';
 
 const RouterComponent = () => {
   return (
     <Router sceneStyle={{ paddingTop: 65 }}>
-    <Scene key="auth" initial >
+    <Scene key='auth' initial >
       <Scene sceneStyle={{backgroundColor: 'transparent'}}
-        key="login"
+        key='login'
         component={LoginForm}
         hideNavBar={true}
         navTransparent
-        title="Login"
+        title='Login'
         titleStyle={{ color: '#9D1017' }}
         navigationBarStyle={{
           opacity:0.0,
@@ -29,9 +29,9 @@ const RouterComponent = () => {
         }}
       />
      <Scene 
-      key="signup"
+      key='signup'
       component={SignupForm}
-      title="Signup"
+      title='Signup'
       hideNavBar={false}
 
       navigationBarStyle={{
@@ -42,9 +42,9 @@ const RouterComponent = () => {
       leftButtonIconStyle={{ tintColor: '#FFFFFF' }}
       />
       <Scene 
-      key="forgotpw"
+      key='forgotpw'
       component={ForgotPassword}
-      title="Password Reset"
+      title='Password Reset'
       hideNavBar={false}
       navTransparent={true}
 
@@ -57,20 +57,20 @@ const RouterComponent = () => {
       />
       </Scene>
 
-      <Scene key="main" >
+      <Scene key='main' >
         <Scene
-          key="mainTab"
+          key='mainTab'
           renderRightButton={() => 
             <View style={{ flex:1,flexDirection: 'row' }}>
             <TouchableOpacity onPress={() => Actions.taskComponent()}>
-                <Icon active name="add" style={{ color: '#FFF',fontSize:40 }} />
+                <Icon active name='add' style={{ color: '#FFF',fontSize:40 }} />
             </TouchableOpacity>
             <TouchableOpacity style={{ marginLeft: 10}}onPress={() => 
               {firebase.auth().signOut() 
-                alert("logout success")
+                alert('logout success')
                 Actions.auth()
             }}>
-            <Icon active name="ios-power" style={{ color: '#FFF',fontSize:30 }} />
+            <Icon active name='ios-power' style={{ color: '#FFF',fontSize:30 }} />
 
         </TouchableOpacity>
         </View>
@@ -79,7 +79,7 @@ const RouterComponent = () => {
           renderLeftButton={() => 
             <View style={{ flexDirection: 'row' }}>
             <TouchableOpacity onPress={() => Actions.taskComponent()}>
-                <Icon active name="ios-menu" style={{ color: '#FFF',fontSize:30 }} />
+                <Icon active name='ios-menu' style={{ color: '#FFF',fontSize:30 }} />
             </TouchableOpacity>
         </View>
 
@@ -87,10 +87,10 @@ const RouterComponent = () => {
           rightButtonStyle={styles.rightButtonStyle}
           renderTitle={() => (
             <View>
-              <Image style={styles.headerLogo}  source={require("./img/header.png")} />
+              <Image style={styles.headerLogo}  source={require('./img/header.png')} />
             </View>
           )}
-          //title="consigliere"
+          //title='consigliere'
           //titleStyle={{ color: '#FFF', fontWeight: 'bold', fontSize: 20, marginBottom: 3, }}
           component={MainPage}
           navigationBarStyle={{
@@ -100,9 +100,9 @@ const RouterComponent = () => {
         />
         
         <Scene
-          key="taskComponent"
+          key='taskComponent'
           component={TaskCreate}
-          title="Task"
+          title='Task'
           navigationBarStyle={{
             backgroundColor: '#760609',
             borderBottomWidth: 0,
