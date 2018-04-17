@@ -8,7 +8,8 @@ import {
   TASK_CREATE,
   TASK_FETCH,
   TASK_FETCH_SUCCESS,
-  DISTANCE_FETCH_SUCCESS
+  DISTANCE_FETCH_SUCCESS,
+  TASK_UPDATE_SUCCESS
 } from './types';
 
 export const taskUpdate = ({ prop, value }) => {
@@ -18,19 +19,28 @@ export const taskUpdate = ({ prop, value }) => {
   };
 };
 
-export const taskCreate = ({ taskName, time, placeId }) => {
+export const taskCreate = ({ taskName, time, placeId, lat, long, uid }) => {
   const { currentUser } = firebase.auth();
+  if (uid.trim() === '') {
+    return (dispatch) => {
+      firebase.database().ref(`/users/${currentUser.uid}/tasks`)
+        .push({ taskName, time, placeId, lat, long });
 
-  return (dispatch) => {
-    firebase.database().ref(`/users/${currentUser.uid}/tasks`)
-      .push({ taskName, time, placeId });
+      dispatch({
+        type: TASK_CREATE,
+      });
 
-    dispatch({
-      type: TASK_CREATE,
-    });
-
-    Actions.mainTab({ type: 'reset' });
-  };
+      Actions.mainTab({ type: 'reset' });
+    };
+  }
+    return (dispatch) => {
+      firebase.database().ref(`users/${currentUser.uid}/tasks/${uid}`)
+          .set({ taskName, time, placeId, lat, long })
+          .then(() => {
+              dispatch({ type: TASK_UPDATE_SUCCESS });
+              Actions.mainTab({ type: 'reset' });
+      }); 
+    };
 };
 
 export const taskFetch = () => {
