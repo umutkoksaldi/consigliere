@@ -6,12 +6,12 @@ import {
   Alert,
   Dimensions
 } from 'react-native';
-import MapView from 'react-native-maps';
+import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { Button, Icon, Spinner } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 
 import { connect } from 'react-redux';
-import { mapInitialize, mapSearch } from '../actions';
+import { mapInitialize, mapSearch, latLongSearch } from '../actions';
 
 
 const { width, height } = Dimensions.get('window');
@@ -25,6 +25,11 @@ const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 class MapComponent extends Component {
   watchId: ?number = null
 
+  state = {
+    marker: {
+      coordinate: {}
+    }
+  }
   componentDidMount() {
     this.props.mapInitialize();
   }
@@ -38,13 +43,25 @@ class MapComponent extends Component {
   }
 
   onCalloutPress() {
+    console.log(this.props.address);
     Actions.taskComponent({
+      task: {
+      taskName: '',
+      time: '',
+      uid: '',
       lat: this.props.latitude,
       long: this.props.longitude,
+      placeId: this.props.placeId },
       latDelta: this.props.latitudeDelta,
       longDelta: this.props.longitudeDelta,
-      placeId: this.props.placeId
     });
+  }
+  onLongPress = (e) => {
+    console.log(e.nativeEvent.coordinate);
+    const longitude = e.nativeEvent.coordinate.longitude;
+    const latitude = e.nativeEvent.coordinate.latitude;
+    console.log(longitude, latitude);
+    this.props.latLongSearch(latitude, longitude);
   }
 
   render() {
@@ -59,13 +76,15 @@ class MapComponent extends Component {
     return (
       <View style={styles.container}>
         <MapView
+          onLongPress={this.onLongPress}
+          provider={PROVIDER_GOOGLE}
           style={styles.map}
           region={{ latitude: this.props.latitude,
                     longitude: this.props.longitude,
                     longitudeDelta: this.props.longitudeDelta,
                     latitudeDelta: this.props.latitudeDelta }}
         >
-            <MapView.Marker
+            <Marker
                 coordinate={{ latitude: this.props.latitude,
                               longitude: this.props.longitude }}
                 //style={{ pinColor: '#9D1017' }}
@@ -79,7 +98,7 @@ class MapComponent extends Component {
                 </View>
               </MapView.Callout>
 
-            </MapView.Marker>
+            </Marker>
         </MapView>
 
         <Button
@@ -186,4 +205,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect(mapStateToProps, { mapInitialize, mapSearch })(MapComponent);
+export default connect(mapStateToProps, { mapInitialize, mapSearch, latLongSearch })(MapComponent);

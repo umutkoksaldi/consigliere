@@ -1,50 +1,47 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import { connect } from 'react-redux';
-import DateTimePicker from 'react-native-modal-datetime-picker';
-import { Text, View, TouchableOpacity, StyleSheet, Keyboard } from 'react-native';
-import MapView from 'react-native-maps';
+import { Text, View, Alert, StyleSheet, Keyboard } from 'react-native';
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import { Button, Item, Input } from 'native-base';
+import DateTimePicker from 'react-native-modal-datetime-picker';
 import { taskUpdate, taskCreate } from '../actions';
 
 class TaskCreate extends Component {
-
   state = {
     isDateTimePickerVisible: false,
-    dateText: 'Choose Date',
-    timeText: 'Choose Time',
-    mode: 'date',
   };
-
+  componentWillMount() {
+    _.each(this.props.task, (value, prop) => {
+      console.log(prop, value);
+      this.props.taskUpdate({ prop, value });
+    });
+    console.log(this.props);
+}
   onDoneButtonPress() {
-    const { taskName, time, placeId, date } = this.props;
-    this.props.taskCreate({ taskName, time, placeId, date });
+    const { taskName, time, placeId, lat, long, uid } = this.props;
+
+    this.props.taskCreate({ taskName, time, placeId, lat, long, uid });
   }
 
-  onTimeFocus = () => {
-    this.setState({ mode: 'time', isDateTimePickerVisible: true });
+  onTimeFocus() {
+    this.setState({ isDateTimePickerVisible: true });
+  }
+  onLongPress = (e) => {
+    console.log(e.nativeEvent.coordinate);
   }
 
-  onDateFocus = () => {
-    this.setState({ mode: 'date', isDateTimePickerVisible: true });
-  }
-
-  hideDateTimePicker = () => {
+  hideDateTimePicker() {
     this.setState({ isDateTimePickerVisible: false });
     Keyboard.dismiss();
   }
 
-  handleDatePicked = (value) => {
-      this.hideDateTimePicker();
-      if (this.state.mode === 'time') {
-        const timeValue = value.toLocaleTimeString();
-        this.props.taskUpdate({ prop: 'time', value });
-        this.setState({ timeText: timeValue });
-      } else { //if (this.state.mode === 'date') {
-        const dateValue = value.toLocaleDateString();
-        this.props.taskUpdate({ prop: 'date', value });
-        this.setState({ dateText: dateValue });
-      }
+  handleDatePicked = (date) => {
+    this.hideDateTimePicker();
+    const value = date.toLocaleTimeString();
+    this.props.taskUpdate({ prop: 'time', value });
   };
+
 
   render() {
     return (
@@ -52,27 +49,25 @@ class TaskCreate extends Component {
         <Item underline style={{ marginLeft: 20, marginRight: 20, marginBottom: 5 }}>
           <Input
             label="taskName"
-            placeholder="Visit Grandma"
+            placeholder="task name..."
             style={styles.input}
             value={this.props.taskName}
             onChangeText={value => this.props.taskUpdate({ prop: 'taskName', value })}
           />
         </Item>
 
-        <Item underline style={{ marginLeft: 20, marginRight: 20, marginBottom: 5 }}>
-          <TouchableOpacity onPress={this.onDateFocus}>
-           <Text style={styles.input}> {this.state.dateText} </Text>
-          </TouchableOpacity>
-        </Item>
-
-        <Item underline style={{ marginLeft: 20, marginRight: 20, marginBottom: 5 }}>
-          <TouchableOpacity onPress={this.onTimeFocus}>
-           <Text style={styles.input}> {this.state.timeText} </Text>
-          </TouchableOpacity>
+        <Item underline style={{ marginLeft: 20, marginRight: 20 }}>
+          <Input
+            label="time"
+            placeholder="time..."
+            style={styles.input}
+            value={this.props.time}
+            onFocus={this.onTimeFocus.bind(this)}
+          />
         </Item>
 
         <DateTimePicker
-          mode={this.state.mode}
+          mode='time'
           isVisible={this.state.isDateTimePickerVisible}
           onConfirm={this.handleDatePicked}
           onCancel={this.hideDateTimePicker}
@@ -80,6 +75,8 @@ class TaskCreate extends Component {
 
         <View style={styles.mapContainer}>
           <MapView
+            onLongPress={this.onLongPress}
+            provider={PROVIDER_GOOGLE}
             region={{ latitude: this.props.lat,
                       longitude: this.props.long,
                       longitudeDelta: this.props.longDelta,
@@ -121,8 +118,9 @@ class TaskCreate extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { taskName, time, date } = state.taskForm;
-  return { taskName, time, date };
+  const { taskName, time, lat, long, placeId, uid } = state.taskForm;
+
+  return { taskName, time, lat, long, placeId, uid };
 };
 
 const styles = StyleSheet.create({
@@ -152,7 +150,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   mapContainer: {
-    height: '30%',
+    height: '50%',
     width: '90%',
     borderWidth: 5,
     borderColor: '#9D1017',
@@ -161,7 +159,7 @@ const styles = StyleSheet.create({
   },
   map: {
     ...StyleSheet.absoluteFillObject
-  },
+  }
 });
 
 export default connect(mapStateToProps, { taskUpdate, taskCreate })(TaskCreate);
