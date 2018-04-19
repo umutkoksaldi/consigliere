@@ -19,12 +19,14 @@ export const taskUpdate = ({ prop, value }) => {
   };
 };
 
-export const taskCreate = ({ taskName, time, placeId, lat, long, uid }) => {
+export const taskCreate = ({ taskName, time, placeId, date, lat, long, uid }) => {
   const { currentUser } = firebase.auth();
+  const datenew = date.toDateString();
+ const time1 = time.toLocaleTimeString();
   if (uid.trim() === '') {
     return (dispatch) => {
-      firebase.database().ref(`/users/${currentUser.uid}/tasks`)
-        .push({ taskName, time, placeId, lat, long });
+      firebase.database().ref(`/users/${currentUser.uid}/tasks/${datenew}`)
+      .push({ taskName, time1, placeId, lat, long });
 
       dispatch({
         type: TASK_CREATE,

@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
-import { Text, View, Alert, StyleSheet, Keyboard } from 'react-native';
+import { Text, View, Alert, StyleSheet, Keyboard, TouchableOpacity } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import { Button, Item, Input } from 'native-base';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { taskUpdate, taskCreate } from '../actions';
 
 class TaskCreate extends Component {
-  state = {
-    isDateTimePickerVisible: false,
-  };
+    state = {
+      isDateTimePickerVisible: false,
+      dateText: 'Choose Date',
+      timeText: 'Choose Time',
+      mode: 'date',
+    };
+  
   componentWillMount() {
     _.each(this.props.task, (value, prop) => {
       console.log(prop, value);
@@ -19,28 +23,40 @@ class TaskCreate extends Component {
     console.log(this.props);
 }
   onDoneButtonPress() {
-    const { taskName, time, placeId, lat, long, uid } = this.props;
+    const { taskName, time, placeId, date, lat, long, uid } = this.props;
 
-    this.props.taskCreate({ taskName, time, placeId, lat, long, uid });
+    this.props.taskCreate({ taskName, time, placeId, date, lat, long, uid });
   }
 
-  onTimeFocus() {
-    this.setState({ isDateTimePickerVisible: true });
+  onTimeFocus = () => {
+    this.setState({ mode: 'time', isDateTimePickerVisible: true });
+  }
+
+  onDateFocus = () => {
+    this.setState({ mode: 'date', isDateTimePickerVisible: true });
   }
   onLongPress = (e) => {
     console.log(e.nativeEvent.coordinate);
   }
 
-  hideDateTimePicker() {
+  hideDateTimePicker = () => {
     this.setState({ isDateTimePickerVisible: false });
     Keyboard.dismiss();
   }
 
-  handleDatePicked = (date) => {
+
+  handleDatePicked = (value) => {
     this.hideDateTimePicker();
-    const value = date.toLocaleTimeString();
-    this.props.taskUpdate({ prop: 'time', value });
-  };
+    if (this.state.mode === 'time') {
+      const timeValue = value.toLocaleTimeString();
+      this.props.taskUpdate({ prop: 'time', value });
+      this.setState({ timeText: timeValue });
+    } else { //if (this.state.mode === 'date') {
+      const dateValue = value.toLocaleDateString();
+      this.props.taskUpdate({ prop: 'date', value });
+      this.setState({ dateText: dateValue });
+    }
+};
 
 
   render() {
@@ -56,23 +72,24 @@ class TaskCreate extends Component {
           />
         </Item>
 
-        <Item underline style={{ marginLeft: 20, marginRight: 20 }}>
-          <Input
-            label="time"
-            placeholder="time..."
-            style={styles.input}
-            value={this.props.time}
-            onFocus={this.onTimeFocus.bind(this)}
-          />
+        <Item underline style={{ marginLeft: 20, marginRight: 20, marginBottom: 5 }}>
+          <TouchableOpacity onPress={this.onDateFocus}>
+           <Text style={styles.input}> {this.state.dateText} </Text>
+          </TouchableOpacity>
+        </Item>
+
+        <Item underline style={{ marginLeft: 20, marginRight: 20, marginBottom: 5 }}>
+          <TouchableOpacity onPress={this.onTimeFocus}>
+           <Text style={styles.input}> {this.state.timeText} </Text>
+          </TouchableOpacity>
         </Item>
 
         <DateTimePicker
-          mode='time'
+          mode={this.state.mode}
           isVisible={this.state.isDateTimePickerVisible}
           onConfirm={this.handleDatePicked}
           onCancel={this.hideDateTimePicker}
         />
-
         <View style={styles.mapContainer}>
           <MapView
             onLongPress={this.onLongPress}
@@ -118,9 +135,9 @@ class TaskCreate extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { taskName, time, lat, long, placeId, uid } = state.taskForm;
+  const { taskName, time, date, lat, long, placeId, uid } = state.taskForm;
 
-  return { taskName, time, lat, long, placeId, uid };
+  return { taskName, time, date, lat, long, placeId, uid };
 };
 
 const styles = StyleSheet.create({
@@ -147,7 +164,8 @@ const styles = StyleSheet.create({
     //Color: '#939799',
     color: '#000000',
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: 'normal',
+    height: 45
   },
   mapContainer: {
     height: '50%',

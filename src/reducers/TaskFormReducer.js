@@ -9,6 +9,7 @@ const INITIAL_STATE = {
   time: '',
   placeId: '',
   uid: '',
+  date: '',
   lat: 0,
   long: 0
 };
