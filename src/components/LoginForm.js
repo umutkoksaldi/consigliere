@@ -1,29 +1,11 @@
 import React, { Component } from 'react';
-import {
-  Text,
-  View,
-  Keyboard,
-  StyleSheet,
-  ImageBackground,
-  TouchableHighlight
-} from 'react-native';
+import { Text, View, Keyboard, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { Button, Spinner } from 'native-base';
-import { Hoshi } from 'react-native-textinput-effects';
-import {
-  emailChanged,
-  passwordChanged,
-  loginUser,
-  signuprequest,
-  passwordforgot, checkSession
-} from '../actions';
-import { CardSection } from './common';
-
+import { emailChanged, passwordChanged, loginUser } from '../actions';
+import { CardSection, Input } from './common';
 
 class LoginForm extends Component {
-  componentWillMount() {
-    this.props.checkSession();
-   }
   onEmailChange(text) {
     this.props.emailChanged(text);
   }
@@ -32,120 +14,75 @@ class LoginForm extends Component {
     this.props.passwordChanged(text);
   }
 
-  onButtonPress1() {
+  onButtonPress() {
     const { email, password } = this.props;
+
     Keyboard.dismiss();
     this.props.loginUser({ email, password });
   }
-  onButtonPress2() {
-    Keyboard.dismiss();
-    signuprequest();
-  }
-  onButtonPress3() {
-    Keyboard.dismiss();
-    passwordforgot();
-  }
-  
-  renderButton1() {
-    console.log(this.props.loading);
+
+  renderButton() {
     if (this.props.loading) {
-      return <Spinner color='red' size='small' />;
+      return (
+        <Spinner
+          color='#FFFFFF'
+          style={{ marginLeft: '45%' }}
+        />
+      );
     }
- 
+
     return (
       <Button
-        style={styles.loginButtonStyle}
-        onPress={this.onButtonPress1.bind(this)}
+        transparent
+        style={styles.buttonStyle}
+        onPress={this.onButtonPress.bind(this)}
       >
-        <Text style={styles.loginTextStyle}>Login</Text>
+        <Text style={styles.buttonTextStyle} >
+          Login
+        </Text>
       </Button>
     );
   }
 
   render() {
-    if (!this.props.session) {
-      return (
-        <ImageBackground
-          source={require('../img/bglogin2.png')}
-          style={{ width: '100%', height: '100%' }}
-        >
-          <View
-            style={{
-              justifyContent: 'center',
-              alignSelf: 'stretch',
-              flex: 1,
-              flexDirection: 'column'
-            }}
-          >
-            
+    return (
+      <View style={styles.loginFormStyle}>
         <View style={styles.inputContainerStyle}>
-          <Hoshi
-          label={'E-mail Address'}
-          borderColor={'#660507'}
-          backgroundColor={'transparent'}
-          onChangeText={this.onEmailChange.bind(this)}
-          value={this.props.email}
-          autoCorrect={false}
-          autoCapitalize='none'
-          keyboardType='email-address'
-          clearButtonMode='while-editing'
-          inputStyle={{ color: '#000', fontSize: 15, fontWeight: 'normal' }}
+          <Input
+            icon={'envelope'}
+            iconSize={18}
+            iconColor={'rgb(255, 255, 255)'}
+            placeholder={'Email Address'}
+            //placeholderTextColor='#FFFFFF'
+            onChangeText={this.onEmailChange.bind(this)}
+            value={this.props.email}
           />
         </View>
 
-      <View style={styles.inputContainerStyle}>
-        <Hoshi
-        label={'Password'}
-        borderColor={'#660507'}
-        backgroundColor={'transparent'}
-        inputStyle={{ color: '#000', fontSize: 15, fontWeight: 'normal' }}
-        secureTextEntry
-        onChangeText={this.onPasswordChange.bind(this)}
-        value={this.props.password}
-        clearButtonMode='while-editing'
+        <View style={styles.inputContainerStyle}>
+          <Input
+            icon={'lock'}
+            iconSize={23}
+            iconColor={'rgb(255, 255, 255)'}
+            placeholder={'Password'}
+            //placeholderTextColor='#FFFFFF'
+            secureTextEntry
+            onChangeText={this.onPasswordChange.bind(this)}
+            value={this.props.password}
+          />
+        </View>
 
-        autoCorrect={false}
-        autoCapitalize='none'
-        />
+        <Text>
+          {this.props.error}
+        </Text>
+
+        <CardSection>
+          {this.renderButton()}
+        </CardSection>
+
       </View>
-            <View style={{ height: 30 }} />
-            <View style={{ marginTop: 10 }}>
-            {this.renderButton1()}
-            </View>
-            <CardSection>
-              <Text style={styles.textStyle}>Forgot your login details?</Text>
-            </CardSection>
-            <CardSection>
-              <TouchableHighlight
-                style={styles.forgotButtonStyle}
-                underlayColor='white'
-                onPress={this.onButtonPress3.bind(this)}
-              >
-                <Text style={styles.forgotTextStyle}>Get help signing in.</Text>
-              </TouchableHighlight>
-            </CardSection>
-            
-          </View>
-          <View style={{ height: 10 }} />
-          <View style={styles.container}>
-            <Text style={styles.textStyle2}>Don't have an account?</Text>
-            <TouchableHighlight
-              style={styles.SignupButtonStyle}
-              underlayColor='white'
-              onPress={this.onButtonPress2.bind(this)}
-            >
-              <Text style={styles.signupTextStyle}>Sign up!</Text>
-            </TouchableHighlight>
-          </View>
-        </ImageBackground>
-      );
-    }
-    return (
-      <Spinner
-        color='#9D1017'
-        style={{ flex: 1 }}
-      />
-  );
+
+    );
   }
 }
 
@@ -154,99 +91,41 @@ const mapStateToProps = state => {
     email: state.auth.email,
     password: state.auth.password,
     error: state.auth.error,
-    loading: state.auth.loading,
-    session: state.auth.session
+    loading: state.auth.loading
   };
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    height: 50
-  },
-  backGroundImageStyle: {
+  loginFormStyle: {
+    ...StyleSheet.absoluteFillObject,
     flex: 1,
-    resizeMode: 'stretch',
-    justifyContent: 'center'
+    alignSelf: 'stretch',
+    backgroundColor: '#9D1017',
+    justifyContent: 'center',
   },
   inputContainerStyle: {
-    borderColor: '#000000',
+    borderBottomWidth: 1,
+    borderColor: '#FFFFFF',
     height: 50,
     alignSelf: 'stretch',
-    marginLeft: 20,
+    marginLeft: 30,
     marginRight: 30,
-    marginTop: 20,
-    backgroundColor: 'transparent'
+    marginTop: 10,
+    backgroundColor: 'transparent',
   },
-  SignupButtonStyle: {
-    justifyContent: 'space-between',
-    flex: 1
+  buttonStyle: {
+    marginLeft: '43%',
+    marginTop: 5
   },
-  forgotButtonStyle: {
-    marginLeft: '30%',
-    marginTop: 5,
-    justifyContent: 'center',
-    alignSelf: 'stretch',
-    alignItems: 'center'
-  },
-  loginButtonStyle: {
-    marginLeft: 20,
-    marginRight: 30,
-    backgroundColor: '#00688b',
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  forgotTextStyle: {
+  buttonTextStyle: {
     alignSelf: 'center',
-    color: '#00688b',
-    fontSize: 14,
-    fontWeight: '600',
-    paddingTop: 0,
-    paddingBottom: 10,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  signupTextStyle: {
-    alignSelf: 'flex-start',
-    color: '#00688b',
-    
-    fontSize: 14,
-    fontWeight: '600',
-    paddingTop: 0,
-    paddingBottom: 10
-  },
-  loginTextStyle: {
-    alignSelf: 'center',
-    color: '#ffffff',
+    color: '#FFFFFF',
     fontSize: 16,
     fontWeight: '600',
     paddingTop: 10,
     paddingBottom: 10
-  },
-  textStyle: {
-    fontWeight: 'normal',
-    fontSize: 14,
-    marginLeft: 100,
-    marginTop: 5,
-    alignSelf: 'center',
-    backgroundColor: 'transparent',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  textStyle2: {
-    fontWeight: 'normal',
-    fontSize: 14,
-    flex: 1,
-    marginLeft: 70,
-    backgroundColor: 'transparent'
   }
+
 });
 
-export default connect(mapStateToProps, {
-  emailChanged,
-  passwordChanged,
-  loginUser, 
-  checkSession
-})(LoginForm);
+export default connect(mapStateToProps, { emailChanged, passwordChanged, loginUser })(LoginForm);

@@ -1,15 +1,10 @@
 import { Alert } from 'react-native';
 import RNGooglePlaces from 'react-native-google-places';
-import axios from 'axios';
 import {
   MAP_INITIALIZE,
   MAP_INITIALIZE_START,
-  MAP_SEARCH,
-  PLACEID_SEARCH,
-  LAT_LONG_SEARCH
+  MAP_SEARCH
 } from './types';
-
-const GOOGLE_MAPS_API_KEY = 'AIzaSyAhUH_qHOXnPrDiAz4SdIRFOGAUIiC4V0o';
 
 export const mapInitialize = () => {
   return (dispatch) => {
@@ -55,32 +50,5 @@ export const mapSearch = () => {
         });
       })
     .catch(error => console.log(error.message));  // error is a Javascript Error object
-  };
-};
-
-export const placeIdSearch = (placeId) => {
-  return (dispatch) => {
-    axios.get(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${placeId}&key=${GOOGLE_MAPS_API_KEY}`)
-    .then(response => {
-      const info = response.data.result.geometry.location;
-      console.log(info);
-      dispatch({
-        type: PLACEID_SEARCH,
-        payload: { lat: info.lat, long: info.lng, name: info.name, address: info.formatted_address, placeId: info.place_id } 
-      });
-    });
-  };
-};
-export const latLongSearch = (lat, long) => {
-  console.log({ lat, long });
-  return (dispatch) => {
-    axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${long}&radius=50&key=${GOOGLE_MAPS_API_KEY}`)
-    .then(response => {
-      const info = response.data.results[0]; 
-      dispatch({
-        type: LAT_LONG_SEARCH,
-        payload: { lat: info.geometry.location.lat, long: info.geometry.location.lng, name: info.name, address: info.vicinity, placeId: info.place_id } 
-      });
-    });
   };
 };
