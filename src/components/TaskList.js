@@ -18,6 +18,7 @@ class TaskList extends Component {
   componentWillMount() {
     this.props.taskFetch();
     this.createDataSource(this.props);
+    console.log(this.props.taskArray);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -42,9 +43,9 @@ class TaskList extends Component {
         { text: 'OK', onPress: () => this.props.taskDelete({ uid }) },
       ],
       { cancelable: false }
-    );
-    
+    ); 
   }
+  
   createDataSource({ taskArray }) {
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     this.dataSource = ds.cloneWithRows(taskArray);
@@ -69,7 +70,7 @@ class TaskList extends Component {
             renderRow={(taskItem) =>
               <ListItem style={styles.listItem} onPress={() => { console.log('pressed'); }}>
                 <View style={{ marginLeft: 10 }}>
-                  <Text style={{ textAlign: 'left', fontSize: 18 }}>{taskItem.taskName}</Text>
+                  <Text style={{ textAlign: 'left', fontSize: 18 }}>{taskItem.uid}</Text>
                 </View>
                 <View style={{ marginTop: 5 }}>
                   <Text style={{ textAlign: 'left', marginLeft: 10, fontSize: 14 }}>{taskItem.time}</Text>
@@ -110,11 +111,15 @@ class TaskList extends Component {
 }
 
 const mapStateToProps = state => {
+  console.log('tasklist');
   console.log(state.taskList);
   const taskArray = _.map(state.taskList.payload, (val, uid) => {
-    return { ...val, uid };
+    return { uid, val: _.map(val, (taskval, taskuid) => { return { ...taskval, taskuid }; }) };
   });
+  //const taskArray = state.taskList.payload.map((val, uid) => { return { ...val, uid }; });
   const { fetching } = state.taskList;
+  console.log('taskArray');
+  console.log(taskArray);
   return { taskArray, fetching };
 };
 

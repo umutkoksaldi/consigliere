@@ -3,13 +3,15 @@ import axios from 'axios';
 import { Alert } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import RNGooglePlaces from 'react-native-google-places';
+import Polyline from '@mapbox/polyline';
 import {
   TASK_UPDATE,
   TASK_CREATE,
   TASK_FETCH,
   TASK_FETCH_SUCCESS,
   DISTANCE_FETCH_SUCCESS,
-  TASK_UPDATE_SUCCESS
+  DIRECTIONS_FETCH_SUCCESS,
+  TASK_UPDATE_SUCCESS,
 } from './types';
 
 export const taskUpdate = ({ prop, value }) => {
@@ -85,6 +87,26 @@ export const distanceFetch = ({ todayTasks }) => {
       type: DISTANCE_FETCH_SUCCESS
     });
   };
+};
+
+export const getDirections = ({ startId, endId }) => {
+  console.log(startId, endId);
+  axios.get(`https://maps.googleapis.com/maps/api/directions/json?mode='driving'&origin=place_id:${startId}&destination=place_id:${endId}&key=AIzaSyAhUH_qHOXnPrDiAz4SdIRFOGAUIiC4V0o`)
+  .then((response) => {
+    const points = Polyline.decode(response.data.route[0].overview_polyline.points);
+    const coords = points.map((point, index) => {
+      return {
+          latitude: point[0],
+          longitude: point[1]
+      };
+  });
+    return (dispatch) => {
+      dispatch({
+        type: DIRECTIONS_FETCH_SUCCESS,
+        payload: coords
+      });
+    };
+  });
 };
 
 export const taskDelete = ({ uid }) => {
