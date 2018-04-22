@@ -28,7 +28,7 @@
   - [x] 12. In RouterComponent.js, add a right button for 'Logout' (Icon preferred) and add the Logout functionality
   
   
-  - [ ] *** 13. Currently when you exit the app, you log out -> make logins persistent
+  - [x] *** 13. Currently when you exit the app, you log out -> make logins persistent
 
 
 ---------------------
