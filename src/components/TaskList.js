@@ -4,6 +4,7 @@ import { View, Text, ListView, StyleSheet, Dimensions, Alert } from 'react-nativ
 import { List, ListItem, Button, Icon, Spinner } from 'native-base';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+import PushNotification from 'react-native-push-notification';
 import { taskFetch, taskDelete } from '../actions';
 
 const { width, height } = Dimensions.get('window');
@@ -15,12 +16,25 @@ const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 class TaskList extends Component {
+  // constructor(props) {
+  //   super(props);
+  //   this.sendNotification = this.sendNotification.bind(this);
+  // }
+
   componentWillMount() {
     this.props.taskFetch();
     this.createDataSource(this.props);
     console.log(this.props.taskArray);
+    // PushNotification.configure({
+    //   onNotification: function(notification) {
+    //     console.log('NOTIFICATION: ', notification);
+    //   },
+    //   popInitialNotification: true,
+    // });
   }
-
+  componentDidMount() {
+    
+  }
   componentWillReceiveProps(nextProps) {
     this.createDataSource(nextProps);
   }
@@ -43,9 +57,16 @@ class TaskList extends Component {
         { text: 'OK', onPress: () => this.props.taskDelete({ uid }) },
       ],
       { cancelable: false }
-    ); 
+    );
+    this.sendNotification();
   }
-  
+
+  sendNotification() {
+    PushNotification.localNotification({
+      message: 'You pushed the notification button!'
+    });
+  }
+
   createDataSource({ taskArray }) {
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     this.dataSource = ds.cloneWithRows(taskArray);

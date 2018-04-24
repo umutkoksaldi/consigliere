@@ -24,8 +24,18 @@ class TaskCreate extends Component {
 }
   onDoneButtonPress() {
     const { taskName, time, placeId, date, lat, long, uid } = this.props;
-
-    this.props.taskCreate({ taskName, time, placeId, date, lat, long, uid });
+    if (taskName.trim() === '' || time.trim() === '' || placeId.trim() === '' || date.trim === '') {
+      Alert.alert(
+        'could not enter a task with blank fields',
+        `${taskName}\n${time}`,
+        [
+          { text: 'Ok', onPress: () => console.log('Cancel Pressed'), style: 'default' },
+        ],
+        { cancelable: false }
+      );
+    } else {
+      this.props.taskCreate({ taskName, time, placeId, date, lat, long, uid });
+    }
   }
 
   onTimeFocus = () => {
