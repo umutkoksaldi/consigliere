@@ -8,7 +8,7 @@ const INITIAL_STATE = {
   taskName: '',
   time: '',
   placeId: '',
-  uid: '',
+  taskuid: '',
   date: '',
   lat: 0,
   long: 0

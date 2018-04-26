@@ -11,7 +11,7 @@ import { Button, Icon, Spinner } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 
 import { connect } from 'react-redux';
-import { mapInitialize, mapSearch, latLongSearch } from '../actions';
+import { mapInitialize, mapSearch, latLongSearch, getDirections } from '../actions';
 
 
 const { width, height } = Dimensions.get('window');
@@ -26,10 +26,9 @@ class MapComponent extends Component {
   watchId: ?number = null
 
   state = {
-    marker: {
-      coordinate: {}
-    }
+    markerPress: false
   }
+  
   componentDidMount() {
     this.props.mapInitialize();
   }
@@ -41,7 +40,12 @@ class MapComponent extends Component {
   onLocateButtonPress() {
     this.props.mapInitialize();
   }
-
+  onDirectionsButtonPress() {
+    console.log('directionsbuttonpressed');
+    this.props.getDirections(this.props.placeId, 'ChIJu-VSrb42dkARp4aCqANvr5M');
+    console.log(this.props.placeId);
+    console.log(this.props.coods);
+  }
   onCalloutPress() {
     console.log(this.props.address);
     Actions.taskComponent({
@@ -99,6 +103,11 @@ class MapComponent extends Component {
               </MapView.Callout>
 
             </Marker>
+            <MapView.Polyline 
+              coordinates={this.props.coords}
+              strokeWidth={2}
+              strokeColor="red" 
+            />
         </MapView>
 
         <Button
@@ -109,7 +118,14 @@ class MapComponent extends Component {
         >
           <Icon name='search' style={{ fontSize: 30, paddingLeft: 4 }} />
         </Button>
-
+        <Button
+          rounded
+          iconleft
+          style={styles.directionsButtonStyle}
+          onPress={this.onDirectionsButtonPress.bind(this)}
+        >
+          <Icon name='search' style={{ fontSize: 30, paddingLeft: 4 }} />
+        </Button>
         <Button
           rounded
           iconleft
@@ -128,6 +144,7 @@ class MapComponent extends Component {
 const mapStateToProps = state => {
   //Alert.alert(JSON.stringify(state.map.latitude));
   return {
+    coords: state.directions.payload,
     latitude: state.map.latitude,
     longitude: state.map.longitude,
     latitudeDelta: LATITUDE_DELTA,
@@ -184,6 +201,13 @@ const styles = StyleSheet.create({
     marginLeft: '75%'
   },
 
+  directionsButtonStyle: {
+    backgroundColor: '#9D1017',
+    width: 60,
+    height: 60,
+    marginBottom: 130,
+    marginLeft: '75%'
+  },
   locateButtonStyle: {
     backgroundColor: '#9D1017',
     width: 60,
@@ -205,4 +229,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect(mapStateToProps, { mapInitialize, mapSearch, latLongSearch })(MapComponent);
+export default connect(mapStateToProps, { mapInitialize, mapSearch, latLongSearch, getDirections })(MapComponent);

@@ -13,18 +13,21 @@ class TaskCreate extends Component {
       dateText: 'Choose Date',
       timeText: 'Choose Time',
       mode: 'date',
+      //value: ''
     };
   
   componentWillMount() {
     _.each(this.props.task, (value, prop) => {
-      console.log(prop, value);
+      //console.log(prop, value);
       this.props.taskUpdate({ prop, value });
     });
-    console.log(this.props);
+    //this.setState({ value: this.jsCoreDateCreator(`${this.props.date} ${this.props.time}`) });
+    //console.log(this.props);
 }
   onDoneButtonPress() {
-    const { taskName, time, placeId, date, lat, long, uid } = this.props;
-    if (taskName.trim() === '' || time.trim() === '' || placeId.trim() === '' || date.trim === '') {
+    const { taskName, time, placeId, date, lat, long, taskuid } = this.props;
+    console.log(taskName, time, placeId, date, lat, long, taskuid);
+    if (taskName.trim() === '' || placeId.trim() === '') {
       Alert.alert(
         'could not enter a task with blank fields',
         `${taskName}\n${time}`,
@@ -34,19 +37,30 @@ class TaskCreate extends Component {
         { cancelable: false }
       );
     } else {
-      this.props.taskCreate({ taskName, time, placeId, date, lat, long, uid });
+      this.props.taskCreate({ taskName, time, placeId, date, lat, long, uid: taskuid });
     }
   }
 
   onTimeFocus = () => {
     this.setState({ mode: 'time', isDateTimePickerVisible: true });
+    console.log(this.props.time);
+    console.log(this.props.date);
+    //console.log(this.state.value);
   }
 
   onDateFocus = () => {
     this.setState({ mode: 'date', isDateTimePickerVisible: true });
+    console.log(this.state.value);
   }
   onLongPress = (e) => {
     console.log(e.nativeEvent.coordinate);
+  }
+
+  jsCoreDateCreator = (dateString) => { 
+    // dateString *HAS* to be in this format "YYYY-MM-DD HH:MM:SS"  
+    const dateParam = dateString.split(/[\s-:]/); 
+    dateParam[1] = (parseInt(dateParam[1], 10) - 1).toString();
+    return new Date(...dateParam);
   }
 
   hideDateTimePicker = () => {
@@ -96,6 +110,7 @@ class TaskCreate extends Component {
 
         <DateTimePicker
           mode={this.state.mode}
+          //date={this.state.value}
           isVisible={this.state.isDateTimePickerVisible}
           onConfirm={this.handleDatePicked}
           onCancel={this.hideDateTimePicker}
@@ -145,9 +160,10 @@ class TaskCreate extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { taskName, time, date, lat, long, placeId, uid } = state.taskForm;
-
-  return { taskName, time, date, lat, long, placeId, uid };
+  const { taskName, time, date, lat, long, placeId, taskuid } = state.taskForm;
+  // console.log('props');
+  // console.log(taskName, time1, date, lat, long, placeId, taskuid);
+  return { taskName, time, date, lat, long, placeId, taskuid };
 };
 
 const styles = StyleSheet.create({
