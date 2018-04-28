@@ -85,7 +85,7 @@ class ForgotPassword extends Component {
             <Hoshi
               label={"E-mail Address"}
               borderColor={"#660507"}
-              backgroundColor={"transparent"}
+                maskColor={'#FFFFFF'}
               inputStyle={{ color: "#000", fontSize: 15, fontWeight: "normal" }}
               onChangeText={text => this.setState({ email: text })}
               value={this.state.email}

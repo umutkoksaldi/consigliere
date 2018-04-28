@@ -6,9 +6,11 @@ import {
 
 const INITIAL_STATE = {
   taskName: '',
+  taskPlaceName: '',
   time: '',
   placeId: '',
-  uid: '',
+  taskuid: '',
+  date: '',
   lat: 0,
   long: 0
 };

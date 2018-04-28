@@ -18,3 +18,5 @@ export const CHECK_SESSION_FAIL = 'check_session_fail';
 export const PLACEID_SEARCH = 'placeid_search';
 export const LAT_LONG_SEARCH = 'lat_long_search';
 export const TASK_UPDATE_SUCCESS = 'task_update_success';
+export const DIRECTIONS_FETCH_SUCCESS = 'directions_fetch_success';
+export const DIRECTIONS_FETCH = 'directions_fetch';

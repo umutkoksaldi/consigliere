@@ -15,15 +15,13 @@ import {
   passwordChanged,
   loginUser,
   signuprequest,
-  passwordforgot, checkSession
+  passwordforgot,
+  checkSession
 } from '../actions';
 import { CardSection } from './common';
 
 
 class LoginForm extends Component {
-  componentWillMount() {
-    this.props.checkSession();
-   }
   onEmailChange(text) {
     this.props.emailChanged(text);
   }
@@ -45,13 +43,14 @@ class LoginForm extends Component {
     Keyboard.dismiss();
     passwordforgot();
   }
-  
+  componentWillMount() {
+    this.props.checkSession();
+  }
   renderButton1() {
-    console.log(this.props.loading);
     if (this.props.loading) {
-      return <Spinner color='red' size='small' />;
+      //return <Spinner color='#000000' style={{ marginLeft: '45%' }} />;
     }
- 
+
     return (
       <Button
         style={styles.loginButtonStyle}
@@ -63,7 +62,7 @@ class LoginForm extends Component {
   }
 
   render() {
-    if (!this.props.session) {
+    if (!this.props.session)
       return (
         <ImageBackground
           source={require('../img/bglogin2.png')}
@@ -77,41 +76,50 @@ class LoginForm extends Component {
               flexDirection: 'column'
             }}
           >
-            
-        <View style={styles.inputContainerStyle}>
-          <Hoshi
-          label={'E-mail Address'}
-          borderColor={'#660507'}
-          backgroundColor={'transparent'}
-          onChangeText={this.onEmailChange.bind(this)}
-          value={this.props.email}
-          autoCorrect={false}
-          autoCapitalize='none'
-          keyboardType='email-address'
-          clearButtonMode='while-editing'
-          inputStyle={{ color: '#000', fontSize: 15, fontWeight: 'normal' }}
-          />
-        </View>
+            <View style={{ height: 15 }} />
 
-      <View style={styles.inputContainerStyle}>
-        <Hoshi
-        label={'Password'}
-        borderColor={'#660507'}
-        backgroundColor={'transparent'}
-        inputStyle={{ color: '#000', fontSize: 15, fontWeight: 'normal' }}
-        secureTextEntry
-        onChangeText={this.onPasswordChange.bind(this)}
-        value={this.props.password}
-        clearButtonMode='while-editing'
-
-        autoCorrect={false}
-        autoCapitalize='none'
-        />
-      </View>
-            <View style={{ height: 30 }} />
-            <View style={{ marginTop: 10 }}>
-            {this.renderButton1()}
+            <View style={styles.inputContainerStyle}>
+              <Hoshi
+                label={'E-mail Address'}
+                borderColor={'#660507'}
+                maskColor={'#FFFFFF'}
+                //backgroundColor={'transparent'}
+                onChangeText={this.onEmailChange.bind(this)}
+                value={this.props.email}
+                autoCorrect={false}
+                autoCapitalize='none'
+                keyboardType='email-address'
+                clearButtonMode='while-editing'
+                inputStyle={{
+                  color: '#000',
+                  fontSize: 15,
+                  fontWeight: 'normal'
+                }}
+              />
             </View>
+
+            <View style={styles.inputContainerStyle}>
+              <Hoshi
+                label={'Password'}
+                borderColor={'#660507'}
+                maskColor={'#FFFFFF'}
+                //backgroundColor={'transparent'}
+                inputStyle={{
+                  color: '#000',
+                  fontSize: 15,
+                  fontWeight: 'normal'
+                }}
+                secureTextEntry
+                onChangeText={this.onPasswordChange.bind(this)}
+                value={this.props.password}
+                clearButtonMode='while-editing'
+                autoCorrect={false}
+                autoCapitalize='none'
+              />
+            </View>
+            <View style={{ height: 30 }} />
+
+            {this.renderButton1()}
             <CardSection>
               <Text style={styles.textStyle}>Forgot your login details?</Text>
             </CardSection>
@@ -124,7 +132,6 @@ class LoginForm extends Component {
                 <Text style={styles.forgotTextStyle}>Get help signing in.</Text>
               </TouchableHighlight>
             </CardSection>
-            
           </View>
           <View style={{ height: 10 }} />
           <View style={styles.container}>
@@ -139,13 +146,7 @@ class LoginForm extends Component {
           </View>
         </ImageBackground>
       );
-    }
-    return (
-      <Spinner
-        color='#9D1017'
-        style={{ flex: 1 }}
-      />
-  );
+    else return <Spinner color='#9D1017' style={{ flex: 1 }} />;
   }
 }
 
@@ -211,7 +212,7 @@ const styles = StyleSheet.create({
   signupTextStyle: {
     alignSelf: 'flex-start',
     color: '#00688b',
-    
+
     fontSize: 14,
     fontWeight: '600',
     paddingTop: 0,
@@ -247,6 +248,6 @@ const styles = StyleSheet.create({
 export default connect(mapStateToProps, {
   emailChanged,
   passwordChanged,
-  loginUser, 
+  loginUser,
   checkSession
 })(LoginForm);

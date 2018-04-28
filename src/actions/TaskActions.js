@@ -3,14 +3,18 @@ import axios from 'axios';
 import { Alert } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import RNGooglePlaces from 'react-native-google-places';
+import Polyline from '@mapbox/polyline';
 import {
   TASK_UPDATE,
   TASK_CREATE,
   TASK_FETCH,
   TASK_FETCH_SUCCESS,
   DISTANCE_FETCH_SUCCESS,
-  TASK_UPDATE_SUCCESS
+  DIRECTIONS_FETCH_SUCCESS,
+  DIRECTIONS_FETCH,
+  TASK_UPDATE_SUCCESS,
 } from './types';
+
 
 export const taskUpdate = ({ prop, value }) => {
   return {
@@ -19,12 +23,14 @@ export const taskUpdate = ({ prop, value }) => {
   };
 };
 
-export const taskCreate = ({ taskName, time, placeId, lat, long, uid }) => {
+export const taskCreate = ({ taskName, time, placeId, date, lat, long, uid, taskPlaceName }) => {
   const { currentUser } = firebase.auth();
+  const datenew = date.toISOString().split('T')[0];
+  const time1 = time.toLocaleTimeString();
   if (uid.trim() === '') {
     return (dispatch) => {
-      firebase.database().ref(`/users/${currentUser.uid}/tasks`)
-        .push({ taskName, time, placeId, lat, long });
+      firebase.database().ref(`/users/${currentUser.uid}/tasks/${datenew}`)
+      .push({ taskName, time1, placeId, lat, long, taskPlaceName });
 
       dispatch({
         type: TASK_CREATE,
@@ -34,8 +40,8 @@ export const taskCreate = ({ taskName, time, placeId, lat, long, uid }) => {
     };
   }
     return (dispatch) => {
-      firebase.database().ref(`users/${currentUser.uid}/tasks/${uid}`)
-          .set({ taskName, time, placeId, lat, long })
+      firebase.database().ref(`users/${currentUser.uid}/tasks/${datenew}/${uid}`)
+          .set({ taskName, time1, placeId, lat, long, taskPlaceName })
           .then(() => {
               dispatch({ type: TASK_UPDATE_SUCCESS });
               Actions.mainTab({ type: 'reset' });
@@ -85,11 +91,38 @@ export const distanceFetch = ({ todayTasks }) => {
   };
 };
 
-export const taskDelete = ({ uid }) => {
-  const { currentUser } = firebase.auth();
+export const getDirections = (startId, endId) => {
+  console.log(startId, endId);
+  return (dispatch) => {
+    dispatch({ type: DIRECTIONS_FETCH });
+    axios.get(`https://maps.googleapis.com/maps/api/directions/json?mode='driving'&origin=place_id:${startId}&destination=place_id:${endId}&key=AIzaSyAhUH_qHOXnPrDiAz4SdIRFOGAUIiC4V0o`)
+    .then((response) => {
+      const points = Polyline.decode(response.data.routes[0].overview_polyline.points);
+      const coords = points.map((point, index) => {
+        return {
+            latitude: point[0],
+            longitude: point[1]
+        };
+    });
+    console.log(coords);
+    dispatch({ type: DIRECTIONS_FETCH_SUCCESS, payload: coords });
+      // return (dispatch) => {
+      //   dispatch({
+      //     type: DIRECTIONS_FETCH_SUCCESS,
+      //     payload: coords
+      //   });
+      // };
+    });
+  };
+};
 
+export const taskDelete = ({ uid, date }) => {
+  console.log('deletetask');
+  const { currentUser } = firebase.auth();
+  console.log(`users/${currentUser.uid}/tasks/${date}/${uid}`);
+  //const datenew = date.toISOString().split('T')[0];
     return () => {
-        firebase.database().ref(`users/${currentUser.uid}/tasks/${uid}`)
+        firebase.database().ref(`users/${currentUser.uid}/tasks/${date}/${uid}`)
             .remove();
     };
 };
