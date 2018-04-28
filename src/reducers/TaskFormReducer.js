@@ -6,6 +6,7 @@ import {
 
 const INITIAL_STATE = {
   taskName: '',
+  taskPlaceName: '',
   time: '',
   placeId: '',
   taskuid: '',

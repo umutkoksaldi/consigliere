@@ -25,7 +25,7 @@ class TaskCreate extends Component {
     //console.log(this.props);
 }
   onDoneButtonPress() {
-    const { taskName, time, placeId, date, lat, long, taskuid } = this.props;
+    const { taskName, time, placeId, date, lat, long, taskuid, taskPlaceName } = this.props;
     console.log(taskName, time, placeId, date, lat, long, taskuid);
     if (taskName.trim() === '' || placeId.trim() === '') {
       Alert.alert(
@@ -37,7 +37,7 @@ class TaskCreate extends Component {
         { cancelable: false }
       );
     } else {
-      this.props.taskCreate({ taskName, time, placeId, date, lat, long, uid: taskuid });
+      this.props.taskCreate({ taskName, time, placeId, date, lat, long, uid: taskuid, taskPlaceName });
     }
   }
 
@@ -160,10 +160,10 @@ class TaskCreate extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { taskName, time, date, lat, long, placeId, taskuid } = state.taskForm;
+  const { taskName, time, date, lat, long, placeId, taskuid, taskPlaceName } = state.taskForm;
   // console.log('props');
   // console.log(taskName, time1, date, lat, long, placeId, taskuid);
-  return { taskName, time, date, lat, long, placeId, taskuid };
+  return { taskName, time, date, lat, long, placeId, taskuid, taskPlaceName };
 };
 
 const styles = StyleSheet.create({
