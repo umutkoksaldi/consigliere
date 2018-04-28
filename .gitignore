@@ -25,7 +25,6 @@ buck-out
 .gradle
 local.properties
 *.iml
-/android/
 
 # XCode
 ios/*
