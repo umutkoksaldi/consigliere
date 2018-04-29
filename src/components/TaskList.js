@@ -128,6 +128,24 @@ class TaskList extends Component {
 
     );
   }
+  
+  loadItems(day) {
+      setTimeout(() => {
+        for (let i = -60; i < 60; i++) {
+          const time = day.timestamp + i * 24 * 60 * 60 * 1000;
+          const strTime = this.timeToString(time);
+          if (!this.state.items[strTime]) { // || this.state.items[strTime].length === 0
+            this.state.items[strTime] = [];
+          }
+        }
+        //console.log(this.state.items);
+        const newItems = {};
+        Object.keys(this.state.items).forEach(key => {newItems[key] = this.state.items[key];});
+        this.setState({
+          items: newItems
+        });
+      }, 1000);
+  }
 
   render() {
     console.log(`props: ${this.props.fetching}`);
@@ -142,7 +160,8 @@ class TaskList extends Component {
     return (
       <Agenda
         items={this.state.items}
-        selected={new Date()} //idk how but returns the current UTC+0 date, have to fix this to UTC+3
+        selected={new Date()}
+        loadItemsForMonth={this.loadItems.bind(this)}
         renderItem={this.renderItem.bind(this)}
         renderEmptyDate={this.renderEmptyDate.bind(this)}
         rowHasChanged={this.rowHasChanged.bind(this)}
