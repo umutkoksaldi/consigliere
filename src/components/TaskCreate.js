@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
-import { Text, View, Alert, StyleSheet, Keyboard, TouchableOpacity } from 'react-native';
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
-import { Button, Item, Input } from 'native-base';
-import DateTimePicker from 'react-native-modal-datetime-picker';
+import { StyleSheet, Keyboard } from 'react-native';
+import { Tabs, Tab } from 'native-base';
 import { taskUpdate, taskCreate } from '../actions';
+import DateTaskCreate from './DateTaskCreate';
+import ErrandCreate from './ErrandCreate';
+import RecurrentCreate from './RecurrentCreate';
+
 
 class TaskCreate extends Component {
     state = {
@@ -24,22 +26,22 @@ class TaskCreate extends Component {
     //this.setState({ value: this.jsCoreDateCreator(`${this.props.date} ${this.props.time}`) });
     //console.log(this.props);
 }
-  onDoneButtonPress() {
-    const { taskName, time, placeId, date, lat, long, taskuid, taskPlaceName } = this.props;
-    console.log(taskName, time, placeId, date, lat, long, taskuid);
-    if (taskName.trim() === '' || placeId.trim() === '') {
-      Alert.alert(
-        'could not enter a task with blank fields',
-        `${taskName}\n${time}`,
-        [
-          { text: 'Ok', onPress: () => console.log('Cancel Pressed'), style: 'default' },
-        ],
-        { cancelable: false }
-      );
-    } else {
-      this.props.taskCreate({ taskName, time, placeId, date, lat, long, uid: taskuid, taskPlaceName });
-    }
-  }
+  // onDoneButtonPress() {
+  //   const { taskName, time, placeId, date, lat, long, taskuid } = this.props;
+  //   console.log(taskName, time, placeId, date, lat, long, taskuid);
+  //   if (taskName.trim() === '' || placeId.trim() === '') {
+  //     Alert.alert(
+  //       'could not enter a task with blank fields',
+  //       `${taskName}\n${time}`,
+  //       [
+  //         { text: 'Ok', onPress: () => console.log('Cancel Pressed'), style: 'default' },
+  //       ],
+  //       { cancelable: false }
+  //     );
+  //   } else {
+  //     this.props.taskCreate({ taskName, time, placeId, date, lat, long, uid: taskuid });
+  //   }
+  // }
 
   onTimeFocus = () => {
     this.setState({ mode: 'time', isDateTimePickerVisible: true });
@@ -85,85 +87,75 @@ class TaskCreate extends Component {
 
   render() {
     return (
-      <View>
-        <Item underline style={{ marginLeft: 20, marginRight: 20, marginBottom: 5 }}>
-          <Input
-            label="taskName"
-            placeholder="task name..."
-            style={styles.input}
-            value={this.props.taskName}
-            onChangeText={value => this.props.taskUpdate({ prop: 'taskName', value })}
-          />
-        </Item>
 
-        <Item underline style={{ marginLeft: 20, marginRight: 20, marginBottom: 5 }}>
-          <TouchableOpacity onPress={this.onDateFocus}>
-           <Text style={styles.input}> {this.state.dateText} </Text>
-          </TouchableOpacity>
-        </Item>
+      <Tabs
+          locked
+          initialPage={0}
+          style={{ marginTop: -11 }}
+          tabBarPosition='overlayTop'
+          tabBarUnderlineStyle={{ borderWidth: 0, backgroundColor: '#E81721' }}
+      >
+        <Tab
+            heading="Task"
+            tabStyle={{
+              backgroundColor: '#F8F8F8',
+              borderBottomWidth: 3,
+              borderColor: '#9CB4E8' }}
+            activeTabStyle={{
+              backgroundColor: '#F8F8F8',
+              borderBottomWidth: 3,
+              borderColor: '#E81721' }}
+            textStyle={{ color: '#9CB4E8', fontWeight: 'bold' }}
+            activeTextStyle={{ color: '#E81721', fontWeight: 'bold' }}
+        >
+            <DateTaskCreate latDelta={this.props.latDelta} longDelta={this.props.longDelta} />
 
-        <Item underline style={{ marginLeft: 20, marginRight: 20, marginBottom: 5 }}>
-          <TouchableOpacity onPress={this.onTimeFocus}>
-           <Text style={styles.input}> {this.state.timeText} </Text>
-          </TouchableOpacity>
-        </Item>
+        </Tab>
 
-        <DateTimePicker
-          mode={this.state.mode}
-          //date={this.state.value}
-          isVisible={this.state.isDateTimePickerVisible}
-          onConfirm={this.handleDatePicked}
-          onCancel={this.hideDateTimePicker}
-        />
-        <View style={styles.mapContainer}>
-          <MapView
-            onLongPress={this.onLongPress}
-            provider={PROVIDER_GOOGLE}
-            region={{ latitude: this.props.lat,
-                      longitude: this.props.long,
-                      longitudeDelta: this.props.longDelta,
-                      latitudeDelta: this.props.latDelta }}
-            style={styles.map}
-          >
-            <MapView.Marker
-                coordinate={{ latitude: this.props.lat,
-                              longitude: this.props.long }}
-                //style={{ pinColor: '#9D1017' }}
-            />
-          </MapView>
-        </View>
+        <Tab
+            heading="Errand"
+            tabStyle={{
+              backgroundColor: '#F8F8F8',
+              borderBottomWidth: 3,
+              borderColor: '#9CB4E8' }}
+            activeTabStyle={{
+              backgroundColor: '#F8F8F8',
+              borderBottomWidth: 3,
+              borderColor: '#E81721' }}
+            textStyle={{ color: '#9CB4E8', fontWeight: 'bold' }}
+            activeTextStyle={{ color: '#E81721', fontWeight: 'bold' }}
+        >
+            <ErrandCreate latDelta={this.props.latDelta} longDelta={this.props.longDelta} />
 
-        <View style={styles.buttonContainer}>
-          <Button
-            block
-            style={styles.button}
-            onPress={this.onDoneButtonPress.bind(this)}
-          >
-            <Text style={styles.buttonText}>
-              Set Reminder
-            </Text>
-          </Button>
+        </Tab>
 
-          <Button
-            block
-            style={styles.button}
-          >
-            <Text style={styles.buttonText}>
-              Change Type
-            </Text>
-          </Button>
-        </View>
+        <Tab
+            heading="Recurrent"
+            tabStyle={{
+              backgroundColor: '#F8F8F8',
+              borderBottomWidth: 3,
+              borderColor: '#9CB4E8' }}
+            activeTabStyle={{
+              backgroundColor: '#F8F8F8',
+              borderBottomWidth: 3,
+              borderColor: '#E81721' }}
+            textStyle={{ color: '#9CB4E8', fontWeight: 'bold' }}
+            activeTextStyle={{ color: '#E81721', fontWeight: 'bold' }}
+        >
+            <RecurrentCreate latDelta={this.props.latDelta} longDelta={this.props.longDelta} />
 
-      </View>
+        </Tab>
+
+      </Tabs>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  const { taskName, time, date, lat, long, placeId, taskuid, taskPlaceName } = state.taskForm;
+  const { taskName, time, date, lat, long, placeId, taskuid } = state.taskForm;
   // console.log('props');
   // console.log(taskName, time1, date, lat, long, placeId, taskuid);
-  return { taskName, time, date, lat, long, placeId, taskuid, taskPlaceName };
+  return { taskName, time, date, lat, long, placeId, taskuid };
 };
 
 const styles = StyleSheet.create({

@@ -7,11 +7,11 @@ class MainPage extends Component {
   render() {
     return (
         <Tabs
-          locked
-          initialPage={0}
-          style={{ marginTop: -11 }}
-          tabBarPosition='overlayTop'
-          tabBarUnderlineStyle={{ borderWidth: 0, backgroundColor: '#E81721' }}
+        locked
+        initialPage={0}
+        style={{ marginTop: 7 }}
+        tabBarPosition='overlayTop'
+        tabBarUnderlineStyle={{ borderWidth: 0, backgroundColor: '#E81721' }}
         >
         <Tab
         heading="Tasks"

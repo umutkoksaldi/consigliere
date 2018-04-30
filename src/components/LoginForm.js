@@ -82,7 +82,7 @@ class LoginForm extends Component {
               <Hoshi
                 label={'E-mail Address'}
                 borderColor={'#660507'}
-                maskColor={'#FFFFFF'}
+                maskColor={'transparent'}
                 //backgroundColor={'transparent'}
                 onChangeText={this.onEmailChange.bind(this)}
                 value={this.props.email}
@@ -102,7 +102,7 @@ class LoginForm extends Component {
               <Hoshi
                 label={'Password'}
                 borderColor={'#660507'}
-                maskColor={'#FFFFFF'}
+                maskColor={'transparent'}
                 //backgroundColor={'transparent'}
                 inputStyle={{
                   color: '#000',
@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   inputContainerStyle: {
-    borderColor: '#000000',
+    borderColor: 'transparent',
     height: 50,
     alignSelf: 'stretch',
     marginLeft: 20,

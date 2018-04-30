@@ -4,11 +4,19 @@ import TaskFormReducer from './TaskFormReducer';
 import MapReducer from './MapReducer';
 import TaskListReducer from './TaskListReducer';
 import DirectionsReducer from './DirectionsReducer';
+import ErrandListReducer from './ErrandListReducer';
+import ErrandFormReducer from './ErrandFormReducer';
+import RecurrentFormReducer from './RecurrentFormReducer';
+import RecurrentListReducer from './RecurrentListReducer';
 
 export default combineReducers({
   directions: DirectionsReducer,
   auth: AuthReducer,
   taskForm: TaskFormReducer,
   map: MapReducer,
-  taskList: TaskListReducer
+  taskList: TaskListReducer,
+  errandList: ErrandListReducer,
+  errandForm: ErrandFormReducer,
+  recurrentForm: RecurrentFormReducer,
+  recurrentList: RecurrentListReducer
 });

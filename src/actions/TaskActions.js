@@ -13,12 +13,34 @@ import {
   DIRECTIONS_FETCH_SUCCESS,
   DIRECTIONS_FETCH,
   TASK_UPDATE_SUCCESS,
+  ERRAND_FETCH_SUCCESS,
+  ERRAND_FETCH,
+  ERRAND_CREATE,
+  ERRAND_UPDATE_SUCCESS,
+  ERRAND_UPDATE,
+  RECURRENT_FETCH_SUCCESS,
+  RECURRENT_CREATE,
+  RECURRENT_UPDATE_SUCCESS,
+  RECURRENT_UPDATE,
 } from './types';
 
 
 export const taskUpdate = ({ prop, value }) => {
   return {
     type: TASK_UPDATE,
+    payload: { prop, value }
+  };
+};
+export const recurrentUpdate = ({ prop, value }) => {
+  return {
+    type: RECURRENT_UPDATE,
+    payload: { prop, value }
+  };
+};
+
+export const errandUpdate = ({ prop, value }) => {
+  return {
+    type: ERRAND_UPDATE,
     payload: { prop, value }
   };
 };
@@ -49,6 +71,67 @@ export const taskCreate = ({ taskName, time, placeId, date, lat, long, uid, task
     };
 };
 
+export const errandCreate = ({ taskName, placeId, lat, long, uid }) => {
+  const { currentUser } = firebase.auth();
+
+  if (uid.trim() === '') {
+    return (dispatch) => {
+      firebase.database().ref(`/users/${currentUser.uid}/errands/`)
+      .push({ taskName, placeId, lat, long, type: 'errand' });
+
+      dispatch({
+        type: ERRAND_CREATE,
+      });
+
+      Actions.mainTab({ type: 'reset' });
+    };
+  }
+    return (dispatch) => {
+      firebase.database().ref(`users/${currentUser.uid}/errands/${uid}`)
+          .set({ taskName, placeId, lat, long })
+          .then(() => {
+              dispatch({ type: ERRAND_UPDATE_SUCCESS });
+              Actions.mainTab({ type: 'reset' });
+      }); 
+    };
+
+};
+
+export const recurrentCreate = ({ taskName, time, placeId, date, lat, long, uid, interval }) => {
+  const { currentUser } = firebase.auth();
+  var time1 = '';
+  var datenew = '';
+  console.log(interval);
+  if (date !== '') {
+    datenew = date.toISOString().split('T')[0];
+  }
+    
+  if (time !== ''){
+    time1 = time.toLocaleTimeString();
+  }
+
+  if (uid.trim() === '') {
+    return (dispatch) => {
+      firebase.database().ref(`/users/${currentUser.uid}/recurrents/`)
+      .push({ taskName, date: datenew, time: time1, placeId, lat, long, type: 'recurrent', interval });
+
+      dispatch({
+        type: RECURRENT_CREATE,
+      });
+
+      Actions.mainTab({ type: 'reset' });
+    };
+  }
+    return (dispatch) => {
+      firebase.database().ref(`/users/${currentUser.uid}/recurrents/`)
+          .set({ taskName, date: datenew, time: time1, placeId, lat, long, type: 'recurrent', interval })
+          .then(() => {
+              dispatch({ type: RECURRENT_UPDATE_SUCCESS });
+              Actions.mainTab({ type: 'reset' });
+      }); 
+    };
+};
+
 export const taskFetch = () => {
   const { currentUser } = firebase.auth();
 
@@ -58,6 +141,36 @@ export const taskFetch = () => {
       .on('value', snapshot => {
         dispatch({
           type: TASK_FETCH_SUCCESS,
+          payload: snapshot.val()
+        });
+      });
+  };
+};
+
+export const errandFetch = () => {
+  const { currentUser } = firebase.auth();
+
+  return (dispatch) => {
+    dispatch({ type: ERRAND_FETCH });
+    firebase.database().ref(`/users/${currentUser.uid}/errands`)
+      .on('value', snapshot => {
+        dispatch({
+          type: ERRAND_FETCH_SUCCESS,
+          payload: snapshot.val()
+        });
+      });
+  };
+};
+
+export const recurrentFetch = () => {
+  const { currentUser } = firebase.auth();
+
+  return (dispatch) => {
+    dispatch({ type: TASK_FETCH });
+    firebase.database().ref(`/users/${currentUser.uid}/recurrents`)
+      .on('value', snapshot => {
+        dispatch({
+          type: RECURRENT_FETCH_SUCCESS,
           payload: snapshot.val()
         });
       });
@@ -116,6 +229,17 @@ export const getDirections = (startId, endId) => {
   };
 };
 
+export const errandDelete = ({ uid }) => {
+  console.log('deleteErrand');
+  const { currentUser } = firebase.auth();
+  console.log(`users/${currentUser.uid}/errands/${uid}`);
+  //const datenew = date.toISOString().split('T')[0];
+    return () => {
+        firebase.database().ref(`users/${currentUser.uid}/errands/${uid}`)
+            .remove();
+    };
+};
+
 export const taskDelete = ({ uid, date }) => {
   console.log('deletetask');
   const { currentUser } = firebase.auth();
@@ -123,6 +247,17 @@ export const taskDelete = ({ uid, date }) => {
   //const datenew = date.toISOString().split('T')[0];
     return () => {
         firebase.database().ref(`users/${currentUser.uid}/tasks/${date}/${uid}`)
+            .remove();
+    };
+};
+
+export const recurrentDelete = ({ uid }) => {
+  console.log('deleteRecurrent');
+  const { currentUser } = firebase.auth();
+  console.log(`users/${currentUser.uid}/recurrents/${uid}`);
+  //const datenew = date.toISOString().split('T')[0];
+    return () => {
+        firebase.database().ref(`users/${currentUser.uid}/recurrents/${uid}`)
             .remove();
     };
 };

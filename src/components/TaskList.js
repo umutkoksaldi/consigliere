@@ -1,11 +1,11 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { View, Text, ListView, StyleSheet, Dimensions, Alert } from 'react-native';
-import { List, ListItem, Button, Icon, Spinner, Container,Content,SwipeRow } from 'native-base';
+import { Button, Icon, Spinner, SwipeRow } from 'native-base';
 import { Agenda } from 'react-native-calendars';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
-import { taskFetch, taskDelete, taskFetchByDate } from '../actions';
+import { taskFetch, taskDelete } from '../actions';
 
 const { width, height } = Dimensions.get('window');
 
@@ -36,10 +36,10 @@ class TaskList extends Component {
 
   onDeleteTask(taskItem) {
     const { taskuid, taskName, time1, date } = taskItem;
-    console.log(taskuid);
+    // console.log(taskuid);
     Alert.alert(
       'Delete this task?',
-      `${taskuid}\n${time1}`,
+      `${taskName}\n${time1}`,
       [
         { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
         { text: 'OK', onPress: () => this.props.taskDelete({ uid: taskuid, date }) },
@@ -122,6 +122,7 @@ class TaskList extends Component {
           body={
             <View styles={StyleSheet.item}>
               <Text style={styles.listItem}>{item.taskItem.taskName}</Text>
+              <Text>{item.taskItem.taskPlaceName} {item.taskItem.time1}</Text>
             </View>
           }
         />

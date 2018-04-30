@@ -13,8 +13,8 @@ import { Button, Icon, Spinner } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 
 import { connect } from 'react-redux';
-import { mapInitialize, mapSearch, latLongSearch, getDirections, taskFetch } from '../actions';
-
+import { taskFetch, mapInitialize, mapSearch, latLongSearch, getDirections, errandUpdate, taskUpdate, recurrentUpdate } from '../actions';
+import { CustomCallout } from './common';
 
 const { width, height } = Dimensions.get('window');
 
@@ -63,8 +63,18 @@ class MapComponent extends Component {
       }
     }).catch(err => console.error('An error occurred', err));
   }
+  
   onCalloutPress() {
     console.log(this.props.address);
+    this.props.errandUpdate({ prop: 'placeId', value: this.props.placeId });
+    this.props.errandUpdate({ prop: 'lat', value: this.props.latitude });
+    this.props.errandUpdate({ prop: 'long', value: this.props.longitude });
+    this.props.recurrentUpdate({ prop: 'placeId', value: this.props.placeId });
+    this.props.recurrentUpdate({ prop: 'lat', value: this.props.latitude });
+    this.props.recurrentUpdate({ prop: 'long', value: this.props.longitude });
+    this.props.taskUpdate({ prop: 'placeId', value: this.props.placeId });
+    this.props.taskUpdate({ prop: 'lat', value: this.props.latitude });
+    this.props.taskUpdate({ prop: 'long', value: this.props.longitude });
     Actions.taskComponent({
       task: {
       taskPlaceName: this.props.name,
@@ -120,12 +130,12 @@ class MapComponent extends Component {
                 //style={{ pinColor: '#9D1017' }}
             >
 
-              <MapView.Callout  tooltip={true} onPress={this.onCalloutPress.bind(this)}>
-                <View style={styles.calloutContainer}>
+              <MapView.Callout tooltip onPress={this.onCalloutPress.bind(this)}>
+                <CustomCallout>
                   <Text style={{ fontWeight: 'bold', textAlign: 'center' }}>
                     {this.props.name}
                   </Text>
-                </View>
+                </CustomCallout>
               </MapView.Callout>
 
             </Marker>
@@ -164,7 +174,6 @@ class MapComponent extends Component {
       </View>
     );
   }
-
 }
 
 const mapStateToProps = state => {
@@ -265,4 +274,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect(mapStateToProps, { mapInitialize, mapSearch, latLongSearch, getDirections, taskFetch })(MapComponent);
+export default connect(mapStateToProps, { taskFetch, recurrentUpdate, mapInitialize, mapSearch, latLongSearch, getDirections, errandUpdate, taskUpdate })(MapComponent);
