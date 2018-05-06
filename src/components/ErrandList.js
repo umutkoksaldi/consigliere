@@ -42,7 +42,7 @@ class ErrandList extends Component {
       `${taskName}`,
       [
         { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-        { text: 'OK', onPress: () => this.props.errandDelete({ uid }) },
+        { text: 'OK', onPress: () => this.props.errandDelete({ uid, date }) },
       ],
       { cancelable: false }
     ); 

@@ -8,6 +8,8 @@ pod 'GooglePlaces'
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+  pod 'RNBackgroundFetch', :path => '../node_modules/react-native-background-fetch'
+
 end
 
 post_install do |installer|

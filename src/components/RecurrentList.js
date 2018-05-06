@@ -53,6 +53,39 @@ class RecurrentList extends Component {
     this.dataSource = ds.cloneWithRows(taskArray);
     console.log(`creating: ${this.dataSource}`);
   }
+
+  convertDateToInterval(taskItem) {
+    const d = new Date(taskItem.val.date);
+    const dayOfWeek = d.getDay();
+    
+    if (taskItem.val.interval === 'day') {
+      return 'Every Day';
+    }
+
+    if (taskItem.val.interval === 'month') {
+      return 'Every Month';
+    }
+
+    if (taskItem.val.interval === 'week') {
+      switch (dayOfWeek) {
+        case 0:
+          return 'Every Sunday';
+        case 1:
+          return 'Every Monday';
+        case 2:
+          return 'Every Tuesday';
+        case 3:
+          return 'Every Wednesday';
+        case 4:
+          return 'Every Thursday';
+        case 5:
+          return 'Every Friday';
+        case 6:
+          return 'Every Saturday';
+      }
+    }
+
+  }
   
   render() {
     console.log(`props: ${this.props.fetching}`);
@@ -73,6 +106,7 @@ class RecurrentList extends Component {
               <ListItem style={styles.listItem} onPress={() => { console.log('pressed'); }}>
                 <View style={{ marginLeft: 10 }}>
                   <Text style={{ textAlign: 'left', fontSize: 18 }}>{taskItem.val.taskName}</Text>
+                  <Text style={{ textAlign: 'left', fontSize: 14 }}>{this.convertDateToInterval(taskItem)}</Text>
                 </View>
               </ListItem>
             }
@@ -124,6 +158,7 @@ const mapStateToProps = state => {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: '15%',
     ...StyleSheet.absoluteFillObject,
     flex: 1,
     flexDirection: 'column',

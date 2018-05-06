@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 import { StyleSheet, Keyboard } from 'react-native';
 import { Tabs, Tab } from 'native-base';
-import { taskUpdate, taskCreate } from '../actions';
+import { taskUpdate, taskCreate, errandUpdate } from '../actions';
 import DateTaskCreate from './DateTaskCreate';
 import ErrandCreate from './ErrandCreate';
 import RecurrentCreate from './RecurrentCreate';
@@ -22,6 +22,7 @@ class TaskCreate extends Component {
     _.each(this.props.task, (value, prop) => {
       //console.log(prop, value);
       this.props.taskUpdate({ prop, value });
+      this.props.errandUpdate({ prop, value });
     });
     //this.setState({ value: this.jsCoreDateCreator(`${this.props.date} ${this.props.time}`) });
     //console.log(this.props);
@@ -91,7 +92,7 @@ class TaskCreate extends Component {
       <Tabs
           locked
           initialPage={0}
-          style={{ marginTop: -11 }}
+          style={{ marginTop: 7 }}
           tabBarPosition='overlayTop'
           tabBarUnderlineStyle={{ borderWidth: 0, backgroundColor: '#E81721' }}
       >
@@ -198,4 +199,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect(mapStateToProps, { taskUpdate, taskCreate })(TaskCreate);
+export default connect(mapStateToProps, { taskUpdate, taskCreate, errandUpdate })(TaskCreate);

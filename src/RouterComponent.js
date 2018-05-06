@@ -6,15 +6,12 @@ import {
   Image,
   ImageBackground
 } from 'react-native';
-import { Button, Icon } from 'native-base';
+import { Icon } from 'native-base';
 import {
   Scene,
   Router,
   Actions,
-  Drawer,
-  DefaultRenderer
 } from 'react-native-router-flux';
-import firebase from 'firebase';
 import LoginForm from './components/LoginForm';
 import TaskCreate from './components/TaskCreate';
 import MainPage from './components/MainPage';
@@ -22,21 +19,21 @@ import SignupForm from './components/SignupForm';
 import ForgotPassword from './components/ForgotPassword';
 import AccountSettings from './components/AccountSettings';
 import MenuScreen from './components/MenuScreen';
-
+import RecurrentList from './components/RecurrentList';
 //import MenuIcon from './img/menuicon.png';
 
 //import {logout} from '../actions';
-function openDrawer() {
-  return (
-    <View style={{ flexDirection: 'row' }}>
-      <TouchableOpacity
-        onPress={() => Actions.refresh({ key: 'drawer', open: true })}
-      >
-        <Icon active name='md-more' style={{ color: '#FFF', fontSize: 30 }} />
-      </TouchableOpacity>
-    </View>
-  );
-}
+// function openDrawer() {
+//   return (
+//     <View style={{ flexDirection: 'row' }}>
+//       <TouchableOpacity
+//         onPress={() => Actions.refresh({ key: 'drawer', open: true })}
+//       >
+//         <Icon active name='md-more' style={{ color: '#FFF', fontSize: 30 }} />
+//       </TouchableOpacity>
+//     </View>
+//   );
+// }
 const RouterComponent = () => {
   return (
     <Router sceneStyle={{ paddingTop: 65 }}>
@@ -86,7 +83,7 @@ const RouterComponent = () => {
           component={ForgotPassword}
           title='Password Reset'
           hideNavBar={false}
-          navTransparent={true}
+          navTransparent
           renderTitle={() => (
             <View>
               <Image
@@ -109,18 +106,18 @@ const RouterComponent = () => {
       <Scene key='main'>
         <Scene
           key='mainTab'
-          renderRightButton={() => (
-            <View>
-              <TouchableOpacity onPress={() => Actions.taskComponent()}>
-                <Icon
-                  active
-                  name='add'
-                  style={{ color: '#FFFFFF', fontSize: 35, paddingBottom: 30 }}
-                />
-              </TouchableOpacity>
-              <View style={{ width: 10 }} />
-            </View>
-          )}
+          // renderRightButton={() => (
+          //   <View>
+          //     <TouchableOpacity onPress={() => Actions.taskComponent()}>
+          //       <Icon
+          //         active
+          //         name='add'
+          //         style={{ color: '#FFFFFF', fontSize: 35, paddingBottom: 30 }}
+          //       />
+          //     </TouchableOpacity>
+          //     <View style={{ width: 10 }} />
+          //   </View>
+          // )}
           rightButtonStyle={styles.rightButtonStyle}
           renderTitle={() => (
             <View>
@@ -133,7 +130,7 @@ const RouterComponent = () => {
           renderLeftButton={() => (
             <View>
               <TouchableOpacity onPress={() => Actions.menu()}>
-                <Icon active name='md-more' style={{color: '#FFFFFF',fontSize: 30,paddingBottom: 30,marginBottom: 5,marginLeft: 5}}
+                <Icon active name='settings' style={{color: '#FFFFFF',fontSize: 30,paddingBottom: 30,marginBottom: 5,marginLeft: 5}}
                 />
               </TouchableOpacity>
               <View style={{ width: 10 }} />
@@ -154,6 +151,31 @@ const RouterComponent = () => {
           key='taskComponent'
           component={TaskCreate}
           title='Task'
+          renderTitle={() => (
+            <View>
+              <Image
+                style={styles.headerLogo}
+                source={require('./img/hdr.png')}
+              />
+            </View>
+          )}
+          navigationBarStyle={{
+            backgroundColor: '#000',
+            borderBottomWidth: 0,
+            borderBottomColor: '#E81721',
+            height: 75
+          }}
+          titleStyle={{
+            color: '#FFFFFF',
+            fontWeight: 'bold',
+            fontFamily: 'Helvetica'
+          }}
+          leftButtonIconStyle={{ tintColor: '#FFFFFF' }}
+        />
+         <Scene
+          key='recurrentList'
+          component={RecurrentList}
+          title='Recurrent Tasks'
           navigationBarStyle={{
             backgroundColor: '#760609',
             borderBottomWidth: 0,
@@ -166,7 +188,6 @@ const RouterComponent = () => {
           }}
           leftButtonIconStyle={{ tintColor: '#FFFFFF' }}
         />
-       
     
         <Scene
           key='menu'
@@ -217,6 +238,7 @@ const RouterComponent = () => {
           leftButtonIconStyle={{ tintColor: '#FFFFFF' }}
         />
       </Scene>
+      
     </Router>
   );
 };

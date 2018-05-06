@@ -41,7 +41,7 @@ AddressSettingsPress() {
   
 }
 RecurringPress() {
-  
+  Actions.recurrentList();
 }
 AccountSettingsPress() {
   Actions.AccountSettings();
@@ -58,32 +58,32 @@ AccountSettingsPress() {
     <View style={{ height: 200 }} />   
         <View style={styles.container}>   
         <CardSection>
-        <Button iconLeft style={styles.ButtonStyle} onPress={Actions.main({ type: 'reset' })}>
+        <Button iconLeft transparent style={styles.ButtonStyle} onPress={Actions.main({ type: 'reset' })}>
         <Icon name='home' style={{ fontSize: 30, color: 'black', marginRight: 10 }} />
         <Text style={styles.buttonTextStyle}>Home</Text>
         </Button>
         </CardSection>
       <CardSection>
-      <Button iconLeft style={styles.ButtonStyle} onPress={this.AccountSettingsPress.bind(this)}>
+      <Button iconLeft transparent style={styles.ButtonStyle} onPress={this.AccountSettingsPress.bind(this)}>
       <Icon name='contact' style={{ fontSize: 30, color: 'black', marginRight: 10 }} />
       <Text style={styles.buttonTextStyle}>Account Settings</Text>
       </Button>
       </CardSection>
 
       <CardSection>
-      <Button iconLeft style={styles.ButtonStyle} onPress={this.AddressSettingsPress.bind(this)}>
+      <Button iconLeft transparent style={styles.ButtonStyle} onPress={this.AddressSettingsPress.bind(this)}>
       <Icon name='navigate' style={{ fontSize: 30, color: 'black', marginRight: 10 }} />
       <Text style={styles.buttonTextStyle}>Address Settings</Text>
       </Button>
       </CardSection>
       <CardSection>
-      <Button iconLeft style={styles.ButtonStyle} onPress={this.RecurringPress.bind(this)} >
+      <Button iconLeft transparent style={styles.ButtonStyle} onPress={this.RecurringPress.bind(this)} >
       <Icon name='calendar' style={{ fontSize: 30, color: 'black', marginRight: 10 }} />
       <Text style={styles.buttonTextStyle}>Manage Recurring Tasks</Text>
       </Button>
       </CardSection>
       <CardSection>
-      <Button iconLeft style={styles.ButtonStyle} onPress={this.onLogoutPress.bind(this)} >
+      <Button iconLeft transparent style={styles.ButtonStyle} onPress={this.onLogoutPress.bind(this)} >
       <Icon name='power' style={{ fontSize: 30, color: 'black', marginRight: 10 }} />
       <Text style={styles.buttonTextStyle}>Sign Out</Text>
       </Button>
@@ -116,7 +116,6 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginRight: 30,
     alignSelf: 'stretch',
-    backgroundColor: 'transparent',
     //justifyContent: 'center',
     //alignItems: 'center'
   },

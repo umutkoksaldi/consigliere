@@ -8,6 +8,7 @@ import {
     taskName: '',
     placeId: '',
     taskuid: '',
+    taskPlaceName: '',
     lat: 0,
     long: 0
   };

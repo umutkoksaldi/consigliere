@@ -3,6 +3,7 @@ package com.consigliere;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.jamesisaac.rnbackgroundtask.BackgroundTaskPackage;
 import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import com.arttitude360.reactnative.rngoogleplaces.RNGooglePlacesPackage;
 import com.facebook.react.ReactNativeHost;
@@ -28,6 +29,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new BackgroundTaskPackage(),
           new ReactNativePushNotificationPackage(),
           new RNGooglePlacesPackage(),
           new VectorIconsPackage(),

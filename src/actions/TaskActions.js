@@ -48,11 +48,11 @@ export const errandUpdate = ({ prop, value }) => {
 export const taskCreate = ({ taskName, time, placeId, date, lat, long, uid, taskPlaceName }) => {
   const { currentUser } = firebase.auth();
   const datenew = date.toISOString().split('T')[0];
-  const time1 = time.toLocaleTimeString();
+  const time1 = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
   if (uid.trim() === '') {
     return (dispatch) => {
       firebase.database().ref(`/users/${currentUser.uid}/tasks/${datenew}`)
-      .push({ taskName, time1, placeId, lat, long, taskPlaceName });
+      .push({ taskName, time: time1, placeId, lat, long, taskPlaceName, type: 'task' });
 
       dispatch({
         type: TASK_CREATE,
@@ -63,7 +63,7 @@ export const taskCreate = ({ taskName, time, placeId, date, lat, long, uid, task
   }
     return (dispatch) => {
       firebase.database().ref(`users/${currentUser.uid}/tasks/${datenew}/${uid}`)
-          .set({ taskName, time1, placeId, lat, long, taskPlaceName })
+          .set({ taskName, time: time1, placeId, lat, long, taskPlaceName, type: 'task' })
           .then(() => {
               dispatch({ type: TASK_UPDATE_SUCCESS });
               Actions.mainTab({ type: 'reset' });
@@ -71,13 +71,15 @@ export const taskCreate = ({ taskName, time, placeId, date, lat, long, uid, task
     };
 };
 
-export const errandCreate = ({ taskName, placeId, lat, long, uid }) => {
+export const errandCreate = ({ taskName, placeId, lat, long, uid, taskPlaceName }) => {
+  console.log({ taskName, placeId, lat, long, uid, taskPlaceName });
   const { currentUser } = firebase.auth();
-
+  const today = new Date();
+  const todaystr = today.toISOString().split('T')[0];
   if (uid.trim() === '') {
     return (dispatch) => {
-      firebase.database().ref(`/users/${currentUser.uid}/errands/`)
-      .push({ taskName, placeId, lat, long, type: 'errand' });
+      firebase.database().ref(`/users/${currentUser.uid}/tasks/${todaystr}/errands/`)
+      .push({ taskName, placeId, lat, long, taskPlaceName, type: 'errand' });
 
       dispatch({
         type: ERRAND_CREATE,
@@ -87,8 +89,8 @@ export const errandCreate = ({ taskName, placeId, lat, long, uid }) => {
     };
   }
     return (dispatch) => {
-      firebase.database().ref(`users/${currentUser.uid}/errands/${uid}`)
-          .set({ taskName, placeId, lat, long })
+      firebase.database().ref(`users/${currentUser.uid}/tasks/${todaystr}/errands/${uid}`)
+          .set({ taskName, placeId, lat, long, taskPlaceName, type: 'errand' })
           .then(() => {
               dispatch({ type: ERRAND_UPDATE_SUCCESS });
               Actions.mainTab({ type: 'reset' });
@@ -229,26 +231,33 @@ export const getDirections = (startId, endId) => {
   };
 };
 
-export const errandDelete = ({ uid }) => {
+export const errandDelete = ({ uid, date }) => {
   console.log('deleteErrand');
   const { currentUser } = firebase.auth();
   console.log(`users/${currentUser.uid}/errands/${uid}`);
   //const datenew = date.toISOString().split('T')[0];
     return () => {
-        firebase.database().ref(`users/${currentUser.uid}/errands/${uid}`)
+        firebase.database().ref(`users/${currentUser.uid}/tasks/${date}/errands/${uid}`)
             .remove();
     };
 };
 
-export const taskDelete = ({ uid, date }) => {
+export const taskDelete = ({ uid, date, type }) => {
   console.log('deletetask');
   const { currentUser } = firebase.auth();
   console.log(`users/${currentUser.uid}/tasks/${date}/${uid}`);
   //const datenew = date.toISOString().split('T')[0];
+  if (type === 'task') {
     return () => {
         firebase.database().ref(`users/${currentUser.uid}/tasks/${date}/${uid}`)
             .remove();
     };
+  } else if (type === 'errand') {
+    return () => {
+      firebase.database().ref(`users/${currentUser.uid}/tasks/${date}/errands/${uid}`)
+          .remove();
+    };
+  }
 };
 
 export const recurrentDelete = ({ uid }) => {
