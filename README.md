@@ -10,7 +10,7 @@
     TASKCREATE.JS    UMUT
   - [ ] 1. "Change Type" button in TaskCreate component file -> convert it to a Picker and store the value
   - [ ] 2. "Set Reminder" button currently saving the Task data to Firebase -> convert it in a way that it holds the push notif. time
-  - [x] 3. [ FURKIE ] "Time" text input currently getting a string -> convert it to a Picker as in Alarm on iOS
+  - [x] 3. [ FURKIE ] "Time" text input currently getting a string -> convert it to a Picker as in Alarm on iOSdfdfd
   
     #### TASKLIST.JS
   - [x] 4. Task List currently is listing the names -> convert it to native-base SwipeableRow component (rightSwipe: delete the task from database / leftSwipe: get the user to the Task Edit screen which is basically TaskCreate.js) ORHCA
