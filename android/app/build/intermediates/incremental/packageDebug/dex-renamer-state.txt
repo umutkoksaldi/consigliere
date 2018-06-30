@@ -1,4 +1,0 @@
-#Tue Apr 24 10:12:45 EET 2018
-base.0=/Users/orhuncaglayan/reactNativeProjects/consigliere/android/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main
-renamed.0=classes.dex
-file.0=/Users/orhuncaglayan/reactNativeProjects/consigliere/android/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex
