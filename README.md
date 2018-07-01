@@ -1,38 +1,36 @@
-## consigliere
+# Consigliere
 
-# consigliere
-## Inshallah we can run on both platforms
-### Deleted get current location function since ios simulator does not support it
----------------------
-  UI & Data Tier
----------------------
+## Description
+---
+Consigliere is a cross-platform application that combines a powerful daily planner with the power of navigation and route-planning. You can use Consigliere much like your regular to-do-list. You can create, delete and edit tasks. The tasks can be attached additional information such as date, time and repetition intervals etc. The meat of Consigliere is that, you can attach location information to each task right from the built-in map. You can get an overview of where each one of your tasks is located, and you can directly search for a place if you want to add an additional task to that location.
 
-    TASKCREATE.JS    UMUT
-  - [ ] 1. "Change Type" button in TaskCreate component file -> convert it to a Picker and store the value
-  - [ ] 2. "Set Reminder" button currently saving the Task data to Firebase -> convert it in a way that it holds the push notif. time
-  - [x] 3. [ FURKIE ] "Time" text input currently getting a string -> convert it to a Picker as in Alarm on iOSdfdfd
-  
-    #### TASKLIST.JS
-  - [x] 4. Task List currently is listing the names -> convert it to native-base SwipeableRow component (rightSwipe: delete the task from database / leftSwipe: get the user to the Task Edit screen which is basically TaskCreate.js) ORHCA
-  - [x] 5. List just shows name -> add "location name | time" as a sub-text as in our mockup UI.
-  - [x] 6. Currently no List Separation as Tomorrow, Today etc. (bcos we do not hold the date data for tasks) -> add date in TaskCreate and display the tasks according to date using ListDivider in native-base
-  - [x] 7. On asynchronous Firebase call at Tasks tab, there is no spinner to be shown in the wait time -> add a Spinner
-  - [x] 8. Add 'Add' button ( '+' Icon preferred) and connect it to TaskCreate.js
-  
-    #### LOGINFORM.JS     SELIN
-  - [x] 9. No Register button as in UI Mockup and no SignUp functionality -> add the text, button and the functionality
-  - [x] 10. User session working but no indicator for session check on login screen -> add spinner
-  - [x] 11. Forgot password
-  
-    #### MAINTAB.JS SELIN
-  - [x] 12. In RouterComponent.js, add a right button for 'Logout' (Icon preferred) and add the Logout functionality
-  
-  
-  - [x] *** 13. Currently when you exit the app, you log out -> make logins persistent
+Once you are done planning out your tasks, Consigliere will offer you the fastest route you can take so that you can complete all of your tasks in the shortest amount of time. Consigliere calculates the most optimal route by taking into consideration the time you will spend at each location, the nature of the task at that location (bank, post office) and the traffic level of the roads between each task area. In light of all the aforementioned data, a graph is constructed and on this graph, the Traveling Salesman Algorithm is executed to provide you with the most optimal way to visit all task points as quickly as possible.
 
+## Demo Video
+---
+Watch a promotional video of the app in action [here](https://youtu.be/iv0iDcLMR2Q)
 
----------------------
-  Logic Tier
----------------------
+## Run
+---
+Simply clone the repository. Inside the root folder, install all dependencies by executing ``` npm install ```
 
-  ...
+Then you can run the application on an Android Simulator with the command ```react-native run-android```
+
+or use the iOS simulator with ```react-native run-ios```
+
+## Relevant Links
+---
+More info on the [Traveling Salesman Algorithm](https://en.wikipedia.org/wiki/Travelling_salesman_problem)
+
+[Project Website](consigliere-app.github.io)
+
+[Project Specifications Report](https://consigliere-app.github.io/assets/files/Specifications_Consigliere.pdf)
+
+[Analysis Report](https://consigliere-app.github.io/assets/files/analysis_report_consigliere.pdf)
+
+[High-level Design Report](https://consigliere-app.github.io/assets/files/highlevel_design_report_consigliere.pdf)
+
+[Low-level Design Report](https://consigliere-app.github.io/assets/files/lldreport.pdf)
+
+[Final Report](https://consigliere-app.github.io/assets/files/final_report.pdf)
+
