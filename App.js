@@ -12,7 +12,7 @@ import RouterComponent from './src/RouterComponent';
 
 const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 const firebaseConfig = {
-  apiKey: 'AIzaSyBu2bhqY4JW3NhbIuMTXaYSg_2Grujv5dY',
+  //apiKey: 'AIzaSyBu2bhqY4JW3NhbIuMTXaYSg_2Gr',
   authDomain: 'consigliere-app.firebaseapp.com',
   databaseURL: 'https://consigliere-app.firebaseio.com',
   projectId: 'consigliere-app',
